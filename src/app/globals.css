@@ -1,0 +1,171 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gl: #0F6E56;
+  --color-gl2: #1D9E75;
+  --color-glm: #9FE1CB;
+  --color-glbg: #E8F5F0;
+  --color-glbg2: #D0EDE4;
+  --color-dark: #0B1612;
+  --color-gl-text: #0F1F17;
+  --color-muted: #4A6B5C;
+  --color-sub: #7A9E8E;
+  --color-gl-border: #DFF0E9;
+  --color-surf: #F5FAF8;
+  --color-amber: #D97706;
+  --font-sora: var(--font-sora);
+  --font-dm: var(--font-dm-sans);
+}
+
+/* CSS vars for inline use */
+:root {
+  --gl: #0F6E56;
+  --gl2: #1D9E75;
+  --glm: #9FE1CB;
+  --glbg: #E8F5F0;
+  --glbg2: #D0EDE4;
+  --dark: #0B1612;
+  --text: #0F1F17;
+  --muted: #4A6B5C;
+  --sub: #7A9E8E;
+  --border: #DFF0E9;
+  --surf: #F5FAF8;
+  --amber: #D97706;
+  --red: #DC2626;
+  --white: #fff;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-dm, 'DM Sans', sans-serif);
+  color: var(--text);
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+.animate-fade-up { animation: fadeUp 0.7s ease both; }
+.animate-fade-up-delay { animation: fadeUp 0.7s 0.15s ease both; }
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── HERO BG ── */
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  top: -20%; right: -10%;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(15,110,86,.07) 0%, transparent 70%);
+}
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  bottom: -10%; left: -5%;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(159,225,203,.12) 0%, transparent 70%);
+}
+.hero-grid-line {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(15,110,86,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15,110,86,.03) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* ── PROBLEM CARDS ── */
+.problem-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: var(--amber);
+}
+
+/* ── HOW IT WORKS connector line ── */
+.hiw-connector::before {
+  content: '';
+  position: absolute;
+  top: 36px;
+  left: 16.67%; right: 16.67%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gl), var(--glm));
+  z-index: 0;
+}
+
+/* ── CHAT PULSE ── */
+.chat-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gl2);
+  animation: pulse 2s infinite;
+}
+
+/* ── HOVER UTILITIES ── */
+.hover-green:hover { color: var(--gl) !important; }
+.hover-border:hover { border-color: var(--gl2) !important; }
+.hover-lift:hover { transform: translateY(-2px); }
+.hover-lift-3:hover { transform: translateY(-3px); }
+
+.card-hover {
+  transition: border-color 0.2s, transform 0.2s, background 0.2s;
+}
+.card-hover:hover {
+  border-color: var(--gl2) !important;
+  transform: translateY(-2px);
+}
+.feat-card-hover:hover {
+  border-color: var(--gl2) !important;
+  background: var(--glbg) !important;
+  transform: translateY(-2px);
+}
+
+.btn-primary-hover {
+  background: var(--gl);
+  color: #fff;
+  transition: background 0.2s, transform 0.2s;
+}
+.btn-primary-hover:hover {
+  background: var(--gl2);
+  transform: translateY(-1px);
+}
+
+.btn-ghost-hover {
+  transition: color 0.2s;
+  color: var(--muted);
+}
+.btn-ghost-hover:hover { color: var(--gl); }
+
+.nav-link-hover {
+  transition: color 0.2s;
+  color: var(--muted);
+}
+.nav-link-hover:hover { color: var(--gl); }
+
+.footer-link-hover {
+  transition: color 0.2s;
+  color: rgba(255,255,255,.4);
+}
+.footer-link-hover:hover { color: var(--glm); }
