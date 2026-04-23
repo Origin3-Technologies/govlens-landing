@@ -430,8 +430,7 @@ function GraphSection() {
             );
           })}
           {nodes.map((n) => {
-            const connected = edges.some((e) => e.from === n.id || e.to === n.id);
-            const dim = hovered !== null && hovered !== n.id && !edges.some((e) => (e.from === n.id && hovered === e.to) || (e.to === n.id && hovered === e.from));
+            const dim =hovered !== null && hovered !== n.id && !edges.some((e) => (e.from === n.id && hovered === e.to) || (e.to === n.id && hovered === e.from));
             return (
               <g key={n.id} onMouseEnter={() => setHovered(n.id)} onMouseLeave={() => setHovered(null)} style={{ cursor: "pointer" }} opacity={dim ? 0.3 : 1}>
                 <circle cx={n.x} cy={n.y} r={28} fill={n.color} fillOpacity={0.15} stroke={n.color} strokeWidth={1.5} />
