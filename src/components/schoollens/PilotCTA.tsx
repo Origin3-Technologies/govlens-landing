@@ -10,48 +10,43 @@ const PERKS = [
   "Direct line to the Origin3 team throughout",
 ];
 
-const DEPARTMENTS = [
-  "Agriculture / BFAR",
-  "HR / HRMO",
-  "Budget / Finance",
-  "Health / RHU",
-  "Social Welfare / DSWD",
-  "Engineering / Infrastructure",
-  "Governor's / Mayor's Office",
+const SCHOOL_TYPES = [
+  "Elementary School",
+  "Secondary School (High School)",
+  "Integrated School (Elem + HS)",
+  "Senior High School",
+  "Special Education (SPED)",
+  "Alternative Learning System (ALS)",
+  "Private School",
   "Other",
 ];
 
 const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "";
 
-// Simple rate limit: track last submission time in memory
 let lastSubmitTime = 0;
-const RATE_LIMIT_MS = 30_000; // 30 seconds between submissions
+const RATE_LIMIT_MS = 30_000;
 
-export default function PilotCTA() {
+export default function SlPilotCTA() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    // Rate limit check
     const now = Date.now();
-    if (now - lastSubmitTime < RATE_LIMIT_MS) {
-      return;
-    }
+    if (now - lastSubmitTime < RATE_LIMIT_MS) return;
 
     setStatus("loading");
     const form = e.currentTarget;
     const data = new FormData(form);
 
-    // If honeypot field is filled, silently fake success (it's a bot)
     if (data.get("website")) {
       setStatus("success");
       return;
     }
 
     data.append("access_key", WEB3FORMS_KEY);
-    data.append("subject", "New GovLens Pilot Application");
-    data.append("from_name", "GovLens Landing");
+    data.append("subject", "New SchoolLens Pilot Application");
+    data.append("from_name", "SchoolLens Landing");
     data.append("botcheck", "");
 
     try {
@@ -73,19 +68,19 @@ export default function PilotCTA() {
   }
 
   return (
-    <section id="pilot" className="py-20 px-[5%]" style={{ background: "var(--gl)" }}>
+    <section id="pilot" className="py-20 px-[5%]" style={{ background: "var(--sl)" }}>
       <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto] gap-12 items-center">
         {/* Left */}
         <div>
           <div
             className="inline-flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase rounded-full px-4 py-1.5 mb-4"
             style={{
-              color: "var(--glm)",
-              background: "rgba(159,225,203,.15)",
-              border: "1px solid rgba(159,225,203,.3)",
+              color: "var(--slm)",
+              background: "rgba(147,197,253,.15)",
+              border: "1px solid rgba(147,197,253,.3)",
             }}
           >
-            ★ GovLens Pilot Partner Program
+            ★ SchoolLens Pilot Partner Program
           </div>
 
           <h2
@@ -96,14 +91,14 @@ export default function PilotCTA() {
               color: "#fff",
             }}
           >
-            Start using GovLens<br />
-            <em className="not-italic" style={{ color: "var(--glm)" }}>for free.</em>
+            Start using SchoolLens<br />
+            <em className="not-italic" style={{ color: "var(--slm)" }}>for free.</em>
           </h2>
 
           <p className="text-base leading-[1.7] mb-6 max-w-[520px]" style={{ color: "rgba(255,255,255,.7)" }}>
-            We&apos;re onboarding LGUs for our <strong style={{ color: "#fff" }}>Q2 2026 cohort.</strong> Pilot
+            We&apos;re onboarding schools for our <strong style={{ color: "#fff" }}>Q2 2026 cohort.</strong> Pilot
             partners get full access, hands-on onboarding support, and direct input on features built
-            for Philippine government data.
+            for Philippine school data.
           </p>
 
           <p className="text-sm mb-6" style={{ color: "rgba(255,255,255,.55)" }}>
@@ -115,10 +110,10 @@ export default function PilotCTA() {
               <div key={p} className="flex items-center gap-2.5 text-sm" style={{ color: "rgba(255,255,255,.85)" }}>
                 <div
                   className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
-                  style={{ background: "rgba(159,225,203,.2)", border: "1px solid var(--glm)" }}
+                  style={{ background: "rgba(147,197,253,.2)", border: "1px solid var(--slm)" }}
                 >
                   <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-                    <path d="M2 6l3 3 5-5" stroke="#9FE1CB" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M2 6l3 3 5-5" stroke="#93C5FD" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
                 {p}
@@ -146,7 +141,7 @@ export default function PilotCTA() {
             <div className="text-center py-5">
               <h4
                 className="font-bold text-lg mb-2"
-                style={{ fontFamily: "var(--font-sora, Sora, sans-serif)", color: "var(--glm)" }}
+                style={{ fontFamily: "var(--font-sora, Sora, sans-serif)", color: "var(--slm)" }}
               >
                 ✓ Application received!
               </h4>
@@ -156,7 +151,6 @@ export default function PilotCTA() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-              {/* Honeypot — invisible to humans, bots fill this in */}
               <input
                 type="text"
                 name="website"
@@ -167,7 +161,7 @@ export default function PilotCTA() {
               />
               {[
                 { name: "name", placeholder: "Your full name", type: "text", required: true },
-                { name: "lgu", placeholder: "LGU / Office name", type: "text", required: true },
+                { name: "school", placeholder: "School name", type: "text", required: true },
                 { name: "position", placeholder: "Your position / title", type: "text", required: true },
                 { name: "email", placeholder: "Email address", type: "email", required: true },
                 { name: "phone", placeholder: "Mobile number (optional)", type: "tel", required: false },
@@ -185,13 +179,13 @@ export default function PilotCTA() {
                     color: "#fff",
                     fontFamily: "var(--font-dm-sans, DM Sans, sans-serif)",
                   }}
-                  onFocus={e => (e.currentTarget.style.borderColor = "var(--glm)")}
+                  onFocus={e => (e.currentTarget.style.borderColor = "var(--slm)")}
                   onBlur={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,.2)")}
                 />
               ))}
 
               <select
-                name="department"
+                name="school_type"
                 className="w-full px-4 py-3 rounded-lg text-[13px] outline-none"
                 style={{
                   background: "rgba(255,255,255,.1)",
@@ -200,15 +194,15 @@ export default function PilotCTA() {
                   fontFamily: "var(--font-dm-sans, DM Sans, sans-serif)",
                 }}
               >
-                <option value="" disabled>Which department? (optional)</option>
-                {DEPARTMENTS.map((d) => (
-                  <option key={d} value={d} style={{ color: "var(--dark)", background: "#fff" }}>
+                <option value="" disabled>School type (optional)</option>
+                {SCHOOL_TYPES.map((d) => (
+                  <option key={d} value={d} style={{ color: "var(--sl-dark)", background: "#fff" }}>
                     {d}
                   </option>
                 ))}
               </select>
 
-              <input type="hidden" name="_subject" value="New GovLens Pilot Application" />
+              <input type="hidden" name="_subject" value="New SchoolLens Pilot Application" />
 
               <button
                 type="submit"
@@ -216,12 +210,12 @@ export default function PilotCTA() {
                 className="w-full py-3.5 rounded-lg text-sm font-bold transition-all mt-1 disabled:opacity-60"
                 style={{
                   background: "#fff",
-                  color: "var(--gl)",
+                  color: "var(--sl)",
                   fontFamily: "var(--font-dm-sans, DM Sans, sans-serif)",
                 }}
                 onMouseEnter={e => {
                   if (status !== "loading") {
-                    (e.currentTarget as HTMLElement).style.background = "var(--glm)";
+                    (e.currentTarget as HTMLElement).style.background = "var(--slm)";
                     (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)";
                   }
                 }}

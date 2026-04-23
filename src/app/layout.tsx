@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Sora, DM_Sans } from "next/font/google";
+import { Sora, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const sora = Sora({
   variable: "--font-sora",
   subsets: ["latin"],
   weight: ["400", "600", "700", "800"],
+  display: "swap",
 });
 
 const dmSans = DM_Sans({
@@ -13,17 +14,31 @@ const dmSans = DM_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
   style: ["normal", "italic"],
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "GovLens — See Your Government Data Clearly",
+  title: "GovLens — The Data Operating System for Philippine LGUs",
   description:
-    "GovLens turns any government Excel file into live dashboards, AI-powered insights, and clean, reliable data — in minutes. Built for Philippine LGUs.",
+    "GovLens helps Philippine Local Government Units collect, connect, and understand their data. AI-powered dashboards, offline capability, and a built-in form builder. Piloting with Cordillera LGUs.",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
   openGraph: {
-    title: "GovLens — See Your Government Data Clearly",
+    title: "GovLens — The Data Operating System for Philippine LGUs",
     description:
-      "Turn any government Excel file into live dashboards and AI insights. Built for Philippine LGUs.",
+      "Collect · Connect · Understand. Built for Philippine government data. Piloting in the Cordillera Administrative Region.",
     type: "website",
+    url: "https://govlens.ph",
   },
 };
 
@@ -31,7 +46,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${sora.variable} ${dmSans.variable}`}>
+    <html lang="en" className={`${sora.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}>
       <body>{children}</body>
     </html>
   );
