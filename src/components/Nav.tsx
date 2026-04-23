@@ -35,23 +35,12 @@ export default function Nav() {
         Gov<span style={{ color: "var(--gl)" }}>Lens</span>
       </a>
 
-      <div className="hidden md:flex items-center gap-8">
-        {["#how-it-works", "#features", "#faq"].map((href) => (
-          <a
-            key={href}
-            href={href}
-            className="nav-link-hover text-sm font-medium no-underline"
-          >
-            {href === "#how-it-works" ? "How it works" : href.replace("#", "").charAt(0).toUpperCase() + href.slice(2)}
-          </a>
-        ))}
-        <a
-          href="#pilot"
-          className="btn-primary-hover text-sm font-semibold no-underline rounded-lg px-5 py-2.5"
-        >
-          Apply for Access
-        </a>
-      </div>
+      <a
+        href="#pilot"
+        className="btn-primary-hover text-sm font-semibold no-underline rounded-lg px-5 py-2.5"
+      >
+        Apply for Access
+      </a>
     </nav>
   );
 }

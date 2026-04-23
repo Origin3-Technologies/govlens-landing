@@ -35,8 +35,8 @@ export default function Hero() {
           </h1>
 
           <p className="text-lg leading-[1.75] mb-9 max-w-[480px]" style={{ color: "var(--muted)" }}>
-            GovLens turns any government Excel file into live dashboards, AI-powered insights,
-            and clean, reliable data — in minutes. No IT team required.
+            Upload any Excel file. GovLens cleans it, builds live dashboards, and lets you ask
+            questions in Filipino or English — in minutes.
           </p>
 
           <div className="flex items-center gap-4 flex-wrap">
@@ -55,6 +55,11 @@ export default function Hero() {
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </a>
+          </div>
+
+          <div className="mt-5 flex items-center gap-5 text-[12px]" style={{ color: "var(--sub)" }}>
+            <span>✓ 45-day free pilot</span>
+            <span>✓ ₱0 setup</span>
           </div>
 
           <div className="mt-7 flex items-center gap-2.5 text-xs" style={{ color: "var(--sub)" }}>

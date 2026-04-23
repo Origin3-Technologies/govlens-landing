@@ -2,14 +2,6 @@
 
 import { useState } from "react";
 
-const PERKS = [
-  "45-day free pilot — full access, all features",
-  "Origin3 assists with your first upload and setup",
-  "No obligation to continue after the pilot",
-  "All your data and dashboards carry over if you subscribe",
-  "Direct line to the Origin3 team throughout",
-];
-
 const DEPARTMENTS = [
   "Agriculture / BFAR",
   "HR / HRMO",
@@ -21,11 +13,17 @@ const DEPARTMENTS = [
   "Other",
 ];
 
-// Replace with your Formspree form ID: https://formspree.io
+const FAQS = [
+  { q: "Do we need IT staff?", a: "No. If you can use Excel, you can use GovLens." },
+  { q: "Is our data secure?", a: "Yes — each LGU's data is fully isolated. COA-audit compliant." },
+  { q: "What happens after the pilot?", a: "Your data carries over if you subscribe, or is deleted within 30 days." },
+];
+
 const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID ?? "YOUR_FORM_ID";
 
 export default function PilotCTA() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -45,7 +43,7 @@ export default function PilotCTA() {
 
   return (
     <section id="pilot" className="py-20 px-[5%]" style={{ background: "var(--gl)" }}>
-      <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto] gap-12 items-center">
+      <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto] gap-12 items-start">
         {/* Left */}
         <div>
           <div
@@ -67,34 +65,35 @@ export default function PilotCTA() {
               color: "#fff",
             }}
           >
-            Start using GovLens<br />
-            <em className="not-italic" style={{ color: "var(--glm)" }}>for free.</em>
+            Apply for free access.
           </h2>
 
-          <p className="text-base leading-[1.7] mb-6 max-w-[520px]" style={{ color: "rgba(255,255,255,.7)" }}>
-            We&apos;re onboarding LGUs for our <strong style={{ color: "#fff" }}>Q2 2026 cohort.</strong> Pilot
-            partners get full access, hands-on onboarding support, and direct input on features built
-            for Philippine government data.
+          <p className="text-base leading-[1.7] mb-8 max-w-[480px]" style={{ color: "rgba(255,255,255,.75)" }}>
+            We&apos;re onboarding Q2 2026 pilot partners. Full access, hands-on setup — no commitment.
           </p>
 
-          <p className="text-sm mb-6" style={{ color: "rgba(255,255,255,.55)" }}>
-            Applications are reviewed on a rolling basis — early applicants get priority scheduling.
-          </p>
-
-          <div className="flex flex-col gap-2.5">
-            {PERKS.map((p) => (
-              <div key={p} className="flex items-center gap-2.5 text-sm" style={{ color: "rgba(255,255,255,.85)" }}>
-                <div
-                  className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
-                  style={{ background: "rgba(159,225,203,.2)", border: "1px solid var(--glm)" }}
+          {/* Inline FAQs */}
+          <div className="flex flex-col gap-0">
+            {FAQS.map((faq, i) => (
+              <div key={i} style={{ borderTop: "1px solid rgba(255,255,255,.15)" }}>
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full text-left flex items-center justify-between py-4 text-sm font-semibold gap-3"
+                  style={{ color: "#fff", background: "transparent", border: "none", cursor: "pointer" }}
                 >
-                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-                    <path d="M2 6l3 3 5-5" stroke="#9FE1CB" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
-                {p}
+                  <span>{faq.q}</span>
+                  <span style={{ color: "rgba(255,255,255,.5)", flexShrink: 0 }}>
+                    {openFaq === i ? "−" : "+"}
+                  </span>
+                </button>
+                {openFaq === i && (
+                  <p className="pb-4 text-sm leading-[1.65]" style={{ color: "rgba(255,255,255,.7)" }}>
+                    {faq.a}
+                  </p>
+                )}
               </div>
             ))}
+            <div style={{ borderTop: "1px solid rgba(255,255,255,.15)" }} />
           </div>
         </div>
 

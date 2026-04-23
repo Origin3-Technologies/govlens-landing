@@ -1,8 +1,8 @@
 const STEPS = [
   {
     num: 1,
-    title: "Upload your file",
-    desc: "Drop any Excel or CSV file into GovLens. Multi-row headers, merged cells, inconsistent formats — all handled automatically.",
+    title: "Your files, as-is",
+    desc: "No reformatting. Drop any government Excel file — multi-row headers, merged cells, inconsistent formats — GovLens handles it.",
     tag: "Works with your existing files",
   },
   {
@@ -27,9 +27,6 @@ export default function HowItWorks() {
       style={{ background: "var(--surf)" }}
     >
       <div className="max-w-[1100px] mx-auto">
-        <div className="text-[11px] font-bold tracking-[2px] uppercase mb-3 reveal" style={{ color: "var(--gl)" }}>
-          How it works
-        </div>
         <h2
           className="font-extrabold leading-[1.15] tracking-[-1px] mb-4 reveal"
           style={{
