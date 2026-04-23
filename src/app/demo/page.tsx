@@ -50,9 +50,9 @@ const TABLE_ROWS = [
 ];
 
 const DATASETS = [
-  { id: "1", name: "Apayao HR Plantilla 2024", rows: 891, cols: 27, quality: 94, type: "Human Resource", updated: "Apr 23, 2026" },
-  { id: "2", name: "ASAP Student Assistance 2024–2025", rows: 350, cols: 12, quality: 88, type: "General", updated: "Apr 20, 2026" },
-  { id: "3", name: "Household Profiling — Apayao", rows: 4521, cols: 38, quality: 91, type: "Household", updated: "Apr 18, 2026" },
+  { id: "1", name: "Municipal HR Plantilla 2025", rows: 891, cols: 27, quality: 94, type: "Human Resource", updated: "Apr 23, 2026" },
+  { id: "2", name: "Student Assistance Program 2024–2025", rows: 350, cols: 12, quality: 88, type: "General", updated: "Apr 20, 2026" },
+  { id: "3", name: "Household Profiling Survey", rows: 4521, cols: 38, quality: 91, type: "Household", updated: "Apr 18, 2026" },
 ];
 
 /* ── GRAPH DATA ── */
@@ -60,7 +60,7 @@ interface GraphNode { id: string; label: string; rows: number; type: string; col
 interface GraphEdge { from: string; to: string; label: string; strength: "exact" | "fuzzy"; }
 
 const GRAPH_NODES: GraphNode[] = [
-  { id: "hr", label: "HR Plantilla 2024", rows: 891, type: "Human Resource", color: "#2563EB", cx: 200, cy: 160 },
+  { id: "hr", label: "HR Plantilla 2025", rows: 891, type: "Human Resource", color: "#2563EB", cx: 200, cy: 160 },
   { id: "asap", label: "ASAP 2024–2025", rows: 350, type: "General", color: "#7C3AED", cx: 420, cy: 80 },
   { id: "hh", label: "Household Profiling", rows: 4521, type: "Household", color: "#059669", cx: 440, cy: 260 },
   { id: "budget", label: "Budget Summary 2025", rows: 144, type: "Finance", color: "#C9A84C", cx: 80, cy: 270 },
@@ -79,8 +79,8 @@ const GRAPH_EDGES: GraphEdge[] = [
 interface Connection { id: string; name: string; type: "postgres" | "sheets"; office: string; tables: number; lastSync: string; status: "ok" | "warning" | "error"; rows: number; }
 
 const CONNECTIONS: Connection[] = [
-  { id: "c1", name: "eApayao-HRIS", type: "postgres", office: "HRMO", tables: 3, lastSync: "2 hours ago", status: "ok", rows: 891 },
-  { id: "c2", name: "eApayao-ASAP", type: "postgres", office: "Mayor's Office", tables: 2, lastSync: "4 hours ago", status: "ok", rows: 598 },
+  { id: "c1", name: "LGU-HRIS", type: "postgres", office: "HRMO", tables: 3, lastSync: "2 hours ago", status: "ok", rows: 891 },
+  { id: "c2", name: "LGU-Assistance", type: "postgres", office: "Mayor's Office", tables: 2, lastSync: "4 hours ago", status: "ok", rows: 598 },
   { id: "c3", name: "Barangay Budget 2024", type: "sheets", office: "Budget Office", tables: 1, lastSync: "1 day ago", status: "warning", rows: 144 },
 ];
 
@@ -88,19 +88,19 @@ const CONNECTIONS: Connection[] = [
 interface BoxNode { id: string; name: string; location: string; status: "online" | "warning" | "offline"; lastSeen: string; uptime: string; cpu: number; ram: number; datasets: number; queries: number; version: string; }
 
 const BOX_NODES: BoxNode[] = [
-  { id: "n1", name: "Box-001", location: "Apayao Capitol, Kabugao", status: "online", lastSeen: "Just now", uptime: "12d 4h", cpu: 18, ram: 42, datasets: 5, queries: 247, version: "v10.0" },
-  { id: "n2", name: "Box-002", location: "Conner Municipal Hall", status: "online", lastSeen: "1 min ago", uptime: "8d 11h", cpu: 31, ram: 58, datasets: 3, queries: 89, version: "v10.0" },
-  { id: "n3", name: "Box-003", location: "Flora Town Hall", status: "warning", lastSeen: "2 hours ago", uptime: "2d 0h", cpu: 0, ram: 0, datasets: 2, queries: 14, version: "v9.5" },
-  { id: "n4", name: "Box-004", location: "Kabugao LGU Office", status: "online", lastSeen: "5 min ago", uptime: "5d 6h", cpu: 9, ram: 35, datasets: 4, queries: 312, version: "v10.0" },
-  { id: "n5", name: "Box-005", location: "Luna Municipal Hall", status: "online", lastSeen: "Just now", uptime: "20d 2h", cpu: 44, ram: 67, datasets: 6, queries: 518, version: "v10.0" },
-  { id: "n6", name: "Box-006", location: "Pudtol LGU Office", status: "offline", lastSeen: "3 days ago", uptime: "—", cpu: 0, ram: 0, datasets: 0, queries: 0, version: "v9.0" },
+  { id: "n1", name: "Box-001", location: "Provincial Capitol — Main Office", status: "online", lastSeen: "Just now", uptime: "12d 4h", cpu: 18, ram: 42, datasets: 5, queries: 247, version: "v10.0" },
+  { id: "n2", name: "Box-002", location: "Northern District Municipal Hall", status: "online", lastSeen: "1 min ago", uptime: "8d 11h", cpu: 31, ram: 58, datasets: 3, queries: 89, version: "v10.0" },
+  { id: "n3", name: "Box-003", location: "Eastern District Town Hall", status: "warning", lastSeen: "2 hours ago", uptime: "2d 0h", cpu: 0, ram: 0, datasets: 2, queries: 14, version: "v9.5" },
+  { id: "n4", name: "Box-004", location: "Central Municipal LGU Office", status: "online", lastSeen: "5 min ago", uptime: "5d 6h", cpu: 9, ram: 35, datasets: 4, queries: 312, version: "v10.0" },
+  { id: "n5", name: "Box-005", location: "Southern District Municipal Hall", status: "online", lastSeen: "Just now", uptime: "20d 2h", cpu: 44, ram: 67, datasets: 6, queries: 518, version: "v10.0" },
+  { id: "n6", name: "Box-006", location: "Western District LGU Office", status: "offline", lastSeen: "3 days ago", uptime: "—", cpu: 0, ram: 0, datasets: 0, queries: 0, version: "v9.0" },
 ];
 
 /* ── SAI RESPONSES ── */
 function getSAIResponse(q: string): string {
   const lq = q.toLowerCase();
   if (lq.match(/babae|female|women|woman/))
-    return "May **470 female employees** sa Apayao HR Plantilla 2024 — 52.7% ng kabuuang workforce. Engineering ang may pinaka-maraming female staff (68 sa 127 total).";
+    return "May **470 female employees** sa Municipal HR Plantilla 2025 — 52.7% ng kabuuang workforce. Engineering ang may pinaka-maraming female staff (68 sa 127 total).";
   if (lq.match(/\blalaki\b|(?<!fe)male(?!.*female)/))
     return "May **421 male employees** — 47.3% ng workforce. Pinaka-marami sa Engineering office (59 males).";
   if (lq.match(/sahod|salary|sueldo|average.*pay|pay.*average/))
@@ -122,9 +122,9 @@ function getSAIResponse(q: string): string {
   if (lq.match(/salary grade|sg\s?\d|\bgrade\b/))
     return "Salary Grade breakdown:\n• SG 1–6: 78 staff\n• SG 7–12: 234 staff\n• SG 13–18: 312 staff (largest)\n• SG 19–24: 189 staff\n• SG 25+: 78 staff\n\nAverage SG: 14.2.";
   if (lq.match(/total|lahat|how many|ilan/))
-    return "**891 total employees** in Apayao HR Plantilla 2024. 470 female, 421 male. 634 permanent, 170 job order, 87 co-terminus. Data quality score: 94/100.";
+    return "**891 total employees** in Municipal HR Plantilla 2025. 470 female, 421 male. 634 permanent, 170 job order, 87 co-terminus. Data quality score: 94/100.";
   if (lq.match(/hello|hi|kamusta|good/))
-    return "Kamusta! Ako si SAI — ang GovLens AI data analyst. Tanungin mo ako tungkol sa Apayao HR data. Halimbawa: 'Ilan ang babae?' o 'What is the average salary grade?'";
+    return "Kamusta! Ako si SAI — ang GovLens AI data analyst. Tanungin mo ako tungkol sa HR data ng inyong LGU. Halimbawa: 'Ilan ang babae?' o 'What is the average salary grade?'";
   return "Nakahanap ako ng kaugnayan sa iyong tanong. Maaari kang magtanong ng mas tiyak — halimbawa: 'How many permanent employees?', 'Which department is largest?', o 'Ilan ang female?'";
 }
 
@@ -314,7 +314,7 @@ function HomeSection({ setSection }: { setSection: (s: Section) => void }) {
     <div className="p-8 max-w-[960px] mx-auto w-full">
       <div className="mb-8">
         <div className="text-[11px] font-bold tracking-[2px] uppercase mb-1" style={{ color: "#2563EB" }}>Welcome back</div>
-        <div className="font-bold text-2xl" style={{ fontFamily: "var(--font-sora, Sora, sans-serif)", color: "#1E293B" }}>Apayao Province</div>
+        <div className="font-bold text-2xl" style={{ fontFamily: "var(--font-sora, Sora, sans-serif)", color: "#1E293B" }}>Municipality</div>
         <div className="text-sm mt-1" style={{ color: "#64748B" }}>3 datasets ready · Last sync: Apr 23, 2026</div>
       </div>
 
@@ -429,7 +429,7 @@ function DashboardSection({ setSection }: { setSection: (s: Section) => void }) 
       <div className="flex items-center justify-between mb-6">
         <div>
           <div className="text-[11px] font-bold tracking-[2px] uppercase mb-1" style={{ color: "#2563EB" }}>Auto-Generated Dashboard</div>
-          <div className="font-bold text-xl" style={{ fontFamily: "var(--font-sora, Sora, sans-serif)", color: "#1E293B" }}>Apayao HR Plantilla 2024</div>
+          <div className="font-bold text-xl" style={{ fontFamily: "var(--font-sora, Sora, sans-serif)", color: "#1E293B" }}>Municipal HR Plantilla 2025</div>
           <div className="text-sm mt-0.5" style={{ color: "#64748B" }}>891 rows · Human Resource · Quality 94/100</div>
         </div>
         <button onClick={() => setSection("chat")} className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-white" style={{ background: "#2563EB" }}>
@@ -478,7 +478,7 @@ const SUGGESTIONS = ["Ilan ang babae?", "What is the average salary?", "Which de
 
 function ChatSection() {
   const [messages, setMessages] = useState<Message[]>([
-    { role: "sai", text: "Kamusta! Ako si SAI — ang GovLens AI data analyst. Maaari akong sagutin ang iyong mga tanong tungkol sa **Apayao HR Plantilla 2024** (891 employees). Tanungin mo ako — Filipino o English, pareho okay." },
+    { role: "sai", text: "Kamusta! Ako si SAI — ang GovLens AI data analyst. Maaari akong sagutin ang iyong mga tanong tungkol sa **Municipal HR Plantilla 2025** (891 employees). Tanungin mo ako — Filipino o English, pareho okay." },
   ]);
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
@@ -514,7 +514,7 @@ function ChatSection() {
             <div className="font-bold text-lg" style={{ fontFamily: "var(--font-sora, Sora, sans-serif)", color: "#1E293B" }}>Ask SAI</div>
             <div className="text-[12px] flex items-center gap-1.5" style={{ color: "#64748B" }}>
               <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
-              Analyzing: Apayao HR Plantilla 2024
+              Analyzing: Municipal HR Plantilla 2025
             </div>
           </div>
         </div>
@@ -585,7 +585,7 @@ function TableSection() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <div className="font-bold text-xl" style={{ fontFamily: "var(--font-sora, Sora, sans-serif)", color: "#1E293B" }}>Data Table</div>
-          <div className="text-sm mt-0.5" style={{ color: "#64748B" }}>Apayao HR Plantilla 2024 · Showing {filtered.length} of 891 records</div>
+          <div className="text-sm mt-0.5" style={{ color: "#64748B" }}>Municipal HR Plantilla 2025 · Showing {filtered.length} of 891 records</div>
         </div>
       </div>
 
@@ -843,7 +843,7 @@ function ConnectionsSection() {
       <div className="grid grid-cols-3 gap-4 mb-6">
         <KPI label="Total Connections" value={String(conns.length)} sub="Active data sources" />
         <KPI label="Total Rows Synced" value="1,633" sub="Across all connections" color="#059669" />
-        <KPI label="Last Sync" value="2h ago" sub="eApayao-HRIS" color="#C9A84C" />
+        <KPI label="Last Sync" value="2h ago" sub="LGU-HRIS" color="#C9A84C" />
       </div>
 
       {/* Connection cards */}
@@ -1126,7 +1126,7 @@ export default function DemoPage() {
               {NAV.find(n => n.id === section)?.label}
             </div>
             <div className="flex items-center gap-3">
-              <div className="text-[12px]" style={{ color: "#94A3B8" }}>Apayao Province</div>
+              <div className="text-[12px]" style={{ color: "#94A3B8" }}>Your LGU</div>
               <div className="w-7 h-7 rounded-full flex items-center justify-center text-white text-[11px] font-bold" style={{ background: "#2563EB" }}>A</div>
               <div className="text-[12px] font-medium" style={{ color: "#1E293B" }}>Admin</div>
             </div>
