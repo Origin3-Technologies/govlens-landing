@@ -70,7 +70,7 @@ export default function PilotForm() {
       <input
         type="text"
         name="lgu"
-        placeholder="LGU / Office name (e.g. Municipality of Luna, Apayao)"
+        placeholder="LGU / Office name (e.g. Municipality of La Trinidad)"
         required
         className="w-full px-4 py-3 rounded-lg text-sm border border-slate-200 outline-none focus:border-primary-500 transition-colors bg-white text-slate-800 placeholder-slate-400"
       />
