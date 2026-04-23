@@ -59,17 +59,17 @@ export default function Hero() {
 
           <div className="mt-7 flex items-center gap-2.5 text-xs" style={{ color: "var(--sub)" }}>
             <div className="flex">
-              {["C", "A", "R"].map((l, i) => (
+              {["HR", "AG", "FI"].map((l, i) => (
                 <div
                   key={l}
-                  className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold border-2 border-white"
+                  className="w-7 h-7 rounded-full flex items-center justify-center text-[9px] font-bold border-2 border-white"
                   style={{ background: "var(--glbg)", color: "var(--gl)", marginLeft: i > 0 ? -8 : 0 }}
                 >
                   {l}
                 </div>
               ))}
             </div>
-            Piloting with LGUs in Apayao and the Cordillera Administrative Region
+            Designed for Philippine municipal and provincial LGUs
           </div>
         </div>
 
@@ -94,7 +94,7 @@ export default function Hero() {
                 className="text-[10px] px-3 py-1 rounded-full"
                 style={{ color: "rgba(255,255,255,.6)", background: "rgba(255,255,255,.1)" }}
               >
-                Apayao · Live
+                Municipality · Live
               </div>
             </div>
 
@@ -126,13 +126,13 @@ export default function Hero() {
                   className="text-[11px] px-3 py-1.5 rounded-[12px_3px_12px_12px] mb-1.5 ml-auto max-w-[85%]"
                   style={{ background: "var(--gl)", color: "#fff" }}
                 >
-                  Ilan ang bakanteng posisyon sa Apayao?
+                  Ilan ang bakanteng posisyon ngayong quarter?
                 </div>
                 <div
                   className="text-[11px] px-3 py-1.5 rounded-[3px_12px_12px_12px] max-w-[90%] leading-[1.5]"
                   style={{ background: "#fff", border: "1px solid var(--border)" }}
                 >
-                  <strong style={{ color: "var(--gl)" }}>23 vacant positions</strong> sa Apayao — 14 sa engineering, 9 sa health sector ngayong quarter.
+                  <strong style={{ color: "var(--gl)" }}>23 vacant positions</strong> — 14 sa engineering, 9 sa health sector ngayong quarter.
                 </div>
               </div>
 
