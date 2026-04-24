@@ -29,6 +29,39 @@ const PILLARS = [
     title: "Ask questions the way you think.",
     desc: 'Type in Filipino or English. "Ilan ang bakante sa HR ngayon?" Get answers in seconds, not days.',
   },
+  {
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="3" width="8" height="5" rx="1" />
+        <rect x="13" y="3" width="8" height="5" rx="1" />
+        <rect x="3" y="11" width="8" height="10" rx="1" />
+        <rect x="13" y="11" width="8" height="5" rx="1" />
+      </svg>
+    ),
+    title: "Drag-and-Drop Dashboard Builder",
+    desc: "Build the exact view your office needs — drag KPI cards, bar charts, donuts, and timelines onto a live canvas. Save, share, and print to PDF in one click.",
+  },
+  {
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <ellipse cx="12" cy="5" rx="9" ry="3" />
+        <path d="M3 5v6c0 1.66 4.03 3 9 3s9-1.34 9-3V5" />
+        <path d="M3 11v6c0 1.66 4.03 3 9 3s9-1.34 9-3v-6" />
+      </svg>
+    ),
+    title: "Live Database Connections",
+    desc: "Connect directly to your existing PostgreSQL database or Google Sheets. Data refreshes automatically — no manual exports, no stale reports.",
+  },
+  {
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        <path d="M8 10h.01M12 10h.01M16 10h.01" />
+      </svg>
+    ),
+    title: "Cross-Dataset AI Chat",
+    desc: "Ask questions that span multiple datasets at once. \"Which barangay has the most 4Ps families and how many are employed?\" — SAI joins your data and answers in seconds.",
+  },
 ];
 
 export default function Features() {

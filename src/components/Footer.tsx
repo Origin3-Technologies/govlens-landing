@@ -17,7 +17,7 @@ export default function Footer() {
         <div className="flex gap-6">
           {[
             { label: "solutions@origin3.net", href: "mailto:solutions@origin3.net" },
-            { label: "origin3.ph", href: "https://origin3.ph" },
+            { label: "origin3.net", href: "https://origin3.net" },
             { label: "Apply for Access", href: "#pilot" },
           ].map((l) => (
             <a

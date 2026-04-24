@@ -1,38 +1,40 @@
 @import "tailwindcss";
 
 @theme {
-  --color-gl: #0F6E56;
-  --color-gl2: #1D9E75;
-  --color-glm: #9FE1CB;
-  --color-glbg: #E8F5F0;
-  --color-glbg2: #D0EDE4;
-  --color-dark: #0B1612;
-  --color-gl-text: #0F1F17;
-  --color-muted: #4A6B5C;
-  --color-sub: #7A9E8E;
-  --color-gl-border: #DFF0E9;
-  --color-surf: #F5FAF8;
-  --color-amber: #D97706;
-  --font-sora: var(--font-sora);
-  --font-dm: var(--font-dm-sans);
+  --color-gl:     #2563EB;
+  --color-gl2:    #3B82F6;
+  --color-glm:    #93C5FD;
+  --color-glbg:   #EFF6FF;
+  --color-glbg2:  #DBEAFE;
+  --color-navy:   #0C1929;
+  --color-gold:   #C9A84C;
+  --color-dark:   #1E293B;
+  --color-muted:  #475569;
+  --color-sub:    #64748B;
+  --color-surf:   #F8FAFC;
+  --color-border: #E2E8F0;
+  --font-sora:    var(--font-sora);
+  --font-dm:      var(--font-dm-sans);
+  --font-mono:    var(--font-jetbrains-mono);
 }
 
-/* CSS vars for inline use */
 :root {
-  --gl: #0F6E56;
-  --gl2: #1D9E75;
-  --glm: #9FE1CB;
-  --glbg: #E8F5F0;
-  --glbg2: #D0EDE4;
-  --dark: #0B1612;
-  --text: #0F1F17;
-  --muted: #4A6B5C;
-  --sub: #7A9E8E;
-  --border: #DFF0E9;
-  --surf: #F5FAF8;
-  --amber: #D97706;
-  --red: #DC2626;
-  --white: #fff;
+  --gl:     #2563EB;
+  --gl2:    #3B82F6;
+  --glm:    #93C5FD;
+  --glbg:   #EFF6FF;
+  --glbg2:  #DBEAFE;
+  --navy:   #0C1929;
+  --gold:   #C9A84C;
+  --dark:   #1E293B;
+  --text:   #1E293B;
+  --muted:  #475569;
+  --sub:    #64748B;
+  --border: #E2E8F0;
+  --surf:   #F8FAFC;
+  --white:  #fff;
+  --amber:  #D97706;
+  --red:    #DC2626;
 }
 
 html { scroll-behavior: smooth; }
@@ -49,14 +51,18 @@ body {
   from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes pulse {
   0%, 100% { opacity: 1; }
   50%       { opacity: 0.4; }
 }
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
 
-.animate-fade-up { animation: fadeUp 0.7s ease both; }
+.animate-fade-up       { animation: fadeUp 0.7s ease both; }
 .animate-fade-up-delay { animation: fadeUp 0.7s 0.15s ease both; }
+.animate-fade-up-2     { animation: fadeUp 0.7s 0.3s ease both; }
 
 /* Scroll reveal */
 .reveal {
@@ -68,73 +74,67 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+.reveal-delay {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s 0.15s ease, transform 0.6s 0.15s ease;
+}
+.reveal-delay.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 /* ── HERO BG ── */
 .hero-bg::before {
   content: '';
   position: absolute;
   top: -20%; right: -10%;
-  width: 600px; height: 600px;
+  width: 700px; height: 700px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(15,110,86,.07) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(37,99,235,.08) 0%, transparent 65%);
+  pointer-events: none;
 }
 .hero-bg::after {
   content: '';
   position: absolute;
-  bottom: -10%; left: -5%;
-  width: 400px; height: 400px;
+  bottom: 0; left: -5%;
+  width: 500px; height: 500px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(159,225,203,.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(201,168,76,.06) 0%, transparent 65%);
+  pointer-events: none;
 }
-.hero-grid-line {
+.hero-grid {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(15,110,86,.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15,110,86,.03) 1px, transparent 1px);
-  background-size: 64px 64px;
+    linear-gradient(rgba(37,99,235,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,.04) 1px, transparent 1px);
+  background-size: 72px 72px;
+  pointer-events: none;
 }
 
-/* ── PROBLEM CARDS ── */
-.problem-card::before {
-  content: '';
+/* ── NAVY SECTION BG ── */
+.navy-grid {
   position: absolute;
-  top: 0; left: 0;
-  width: 3px; height: 100%;
-  background: var(--amber);
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size: 72px 72px;
+  pointer-events: none;
 }
 
-/* ── HOW IT WORKS connector line ── */
-.hiw-connector::before {
-  content: '';
-  position: absolute;
-  top: 36px;
-  left: 16.67%; right: 16.67%;
-  height: 2px;
-  background: linear-gradient(90deg, var(--gl), var(--glm));
-  z-index: 0;
-}
-
-/* ── CHAT PULSE ── */
-.chat-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--gl2);
-  animation: pulse 2s infinite;
-}
-
-/* ── HOVER UTILITIES ── */
-.hover-green:hover { color: var(--gl) !important; }
-.hover-border:hover { border-color: var(--gl2) !important; }
-.hover-lift:hover { transform: translateY(-2px); }
-.hover-lift-3:hover { transform: translateY(-3px); }
-
+/* ── CARD STYLES ── */
 .card-hover {
-  transition: border-color 0.2s, transform 0.2s, background 0.2s;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 .card-hover:hover {
   border-color: var(--gl2) !important;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(37,99,235,.12);
+}
+.feat-card-hover {
+  transition: border-color 0.2s, transform 0.2s, background 0.2s;
 }
 .feat-card-hover:hover {
   border-color: var(--gl2) !important;
@@ -142,30 +142,133 @@ body {
   transform: translateY(-2px);
 }
 
-.btn-primary-hover {
+/* ── BUTTONS ── */
+.btn-primary {
   background: var(--gl);
   color: #fff;
-  transition: background 0.2s, transform 0.2s;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
 }
-.btn-primary-hover:hover {
-  background: var(--gl2);
+.btn-primary:hover {
+  background: #1D4ED8;
   transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(37,99,235,.35);
 }
-
-.btn-ghost-hover {
+.btn-ghost {
   transition: color 0.2s;
   color: var(--muted);
 }
-.btn-ghost-hover:hover { color: var(--gl); }
+.btn-ghost:hover { color: var(--gl); }
+.btn-outline {
+  border: 1.5px solid rgba(255,255,255,.25);
+  color: #fff;
+  transition: border-color 0.2s, background 0.2s;
+}
+.btn-outline:hover {
+  border-color: rgba(255,255,255,.6);
+  background: rgba(255,255,255,.08);
+}
 
-.nav-link-hover {
+/* ── NAV ── */
+.nav-link {
   transition: color 0.2s;
   color: var(--muted);
 }
-.nav-link-hover:hover { color: var(--gl); }
+.nav-link:hover { color: var(--gl); }
 
-.footer-link-hover {
+/* ── PROBLEM ── */
+.problem-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: var(--gold);
+  border-radius: 3px 0 0 3px;
+}
+
+/* ── CAPABILITY CARDS ── */
+.cap-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.cap-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(37,99,235,.14);
+}
+.cap-num {
+  position: absolute;
+  bottom: -12px; right: 12px;
+  font-family: var(--font-sora, Sora, sans-serif);
+  font-size: 96px;
+  font-weight: 800;
+  color: rgba(37,99,235,.06);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── BOX CARDS ── */
+.box-node {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+.box-node:hover { transform: translateY(-2px); }
+
+/* ── STEP CONNECTOR ── */
+.steps-connector {
+  position: relative;
+}
+.steps-connector::before {
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: 14%; right: 14%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gl), var(--glm));
+  z-index: 0;
+}
+@media (max-width: 767px) {
+  .steps-connector::before { display: none; }
+}
+
+/* ── FAQ ── */
+details summary {
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+details summary::-webkit-details-marker { display: none; }
+details[open] .faq-chevron { transform: rotate(180deg); }
+.faq-chevron {
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+
+/* ── MONO LABELS ── */
+.mono {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+}
+
+/* ── CHAT DOT ── */
+.chat-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gl2);
+  animation: pulse 2s infinite;
+  display: inline-block;
+}
+
+/* ── FOOTER ── */
+.footer-link {
   transition: color 0.2s;
   color: rgba(255,255,255,.4);
 }
-.footer-link-hover:hover { color: var(--glm); }
+.footer-link:hover { color: rgba(255,255,255,.85); }
+
+/* ── FORM ── */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--gl) !important;
+  box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+}

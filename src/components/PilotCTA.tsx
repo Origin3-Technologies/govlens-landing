@@ -13,13 +13,11 @@ const DEPARTMENTS = [
   "Other",
 ];
 
-const FAQS = [
-  { q: "Do we need IT staff?", a: "No. If you can use Excel, you can use GovLens." },
-  { q: "Is our data secure?", a: "Yes — each LGU's data is fully isolated. COA-audit compliant." },
-  { q: "What happens after the pilot?", a: "Your data carries over if you subscribe, or is deleted within 30 days." },
-];
+const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "";
 
-const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID ?? "YOUR_FORM_ID";
+// Simple rate limit: track last submission time in memory
+let lastSubmitTime = 0;
+const RATE_LIMIT_MS = 30_000; // 30 seconds between submissions
 
 export default function PilotCTA() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -27,15 +25,41 @@ export default function PilotCTA() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    // Rate limit check
+    const now = Date.now();
+    if (now - lastSubmitTime < RATE_LIMIT_MS) {
+      return;
+    }
+
     setStatus("loading");
     const form = e.currentTarget;
+    const data = new FormData(form);
+
+    // If honeypot field is filled, silently fake success (it's a bot)
+    if (data.get("website")) {
+      setStatus("success");
+      return;
+    }
+
+    data.append("access_key", WEB3FORMS_KEY);
+    data.append("subject", "New GovLens Pilot Application");
+    data.append("from_name", "GovLens Landing");
+    data.append("botcheck", "");
+
     try {
-      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        body: new FormData(form),
+        body: data,
         headers: { Accept: "application/json" },
       });
-      setStatus(res.ok ? "success" : "error");
+      const json = await res.json();
+      if (json.success) {
+        lastSubmitTime = Date.now();
+        setStatus("success");
+      } else {
+        setStatus("error");
+      }
     } catch {
       setStatus("error");
     }
@@ -126,6 +150,15 @@ export default function PilotCTA() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+              {/* Honeypot — invisible to humans, bots fill this in */}
+              <input
+                type="text"
+                name="website"
+                defaultValue=""
+                style={{ display: "none" }}
+                tabIndex={-1}
+                autoComplete="off"
+              />
               {[
                 { name: "name", placeholder: "Your full name", type: "text", required: true },
                 { name: "lgu", placeholder: "LGU / Office name", type: "text", required: true },
