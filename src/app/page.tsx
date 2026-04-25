@@ -855,7 +855,7 @@ function PilotForm() {
     setStatus("sending");
     try {
       const data = new FormData();
-      data.append("access_key", "b6122959-5217-483e-88b5-6697b0db7d06");
+      data.append("access_key", process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "");
       data.append("subject", "New GovLens Pilot Application");
       data.append("from_name", "GovLens Landing");
       Object.entries(form).forEach(([k, v]) => data.append(k, v));
