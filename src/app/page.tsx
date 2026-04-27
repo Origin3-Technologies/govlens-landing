@@ -857,7 +857,7 @@ function PilotForm() {
       const data = new FormData();
       data.append("access_key", process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "");
       data.append("subject", "New GovLens Pilot Application");
-      data.append("from_name", "GovLens Landing");
+      data.append("from_name", form.org || "GovLens Landing");
       Object.entries(form).forEach(([k, v]) => data.append(k, v));
       const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
