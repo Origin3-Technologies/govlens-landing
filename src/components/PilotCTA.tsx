@@ -44,7 +44,7 @@ export default function PilotCTA() {
 
     data.append("access_key", WEB3FORMS_KEY);
     data.append("subject", "New GovLens Pilot Application");
-    data.append("from_name", "GovLens Landing");
+    data.append("from_name", (data.get("lgu") as string) || "GovLens Landing");
     data.append("botcheck", "");
 
     try {

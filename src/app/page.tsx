@@ -854,12 +854,18 @@ function PilotForm() {
     e.preventDefault();
     setStatus("sending");
     try {
-      const res = await fetch("https://formspree.io/f/xpwzbbqv", {
+      const data = new FormData();
+      data.append("access_key", process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "");
+      data.append("subject", "New GovLens Pilot Application");
+      data.append("from_name", form.org || "GovLens Landing");
+      Object.entries(form).forEach(([k, v]) => data.append(k, v));
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(form),
+        headers: { Accept: "application/json" },
+        body: data,
       });
-      setStatus(res.ok ? "success" : "error");
+      const json = await res.json();
+      setStatus(json.success ? "success" : "error");
     } catch {
       setStatus("error");
     }
