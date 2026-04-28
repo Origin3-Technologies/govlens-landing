@@ -274,7 +274,7 @@ function Problem() {
         </svg>
       ),
       value: "57%",
-      label: "of LGU barangays have no reliable internet connection",
+      label: "of barangays have no reliable internet connection",
       source: "PSA 2023",
     },
     {
@@ -321,7 +321,7 @@ function Problem() {
           <span style={{ color: "var(--glm)" }}>The data exists. The visibility does not.</span>
         </h2>
         <p className="text-base leading-[1.7] mb-14 max-w-[560px] reveal" style={{ color: "rgba(255,255,255,0.55)" }}>
-          Every office has data. None of it talks to each other. Decision-makers wait days for a report that should take seconds.
+          Every office has data. These systems do not talk to each other. Decision-makers wait days for a report that should take seconds.
         </p>
         <div className="grid md:grid-cols-3 gap-6">
           {stats.map((s) => (
@@ -453,7 +453,7 @@ function Product() {
                 GovLens is compliant by design
               </div>
               <p className="text-sm leading-[1.6]" style={{ color: "var(--muted)" }}>
-                Built to meet RA 10173 (Data Privacy Act), aligned with RA 12254 (E-Governance Act, April 2027 deadline), and COA-ready audit logging on every action.
+                Built with RA 10173 compliance in mind, aligned with RA 12254 (E-Governance Act), and designed with COA-ready audit logs for every action.
               </p>
             </div>
             <div className="flex gap-3 flex-shrink-0">
@@ -500,7 +500,7 @@ function InABox() {
         </svg>
       ),
       title: "Local WiFi Hotspot",
-      desc: "Box creates its own WiFi network. Staff connect on phones and tablets, no internet needed.",
+      desc: "The Box creates its own Wi-Fi network. Staff connect on phones and tablets. No internet needed.",
     },
   ];
   return (
@@ -525,12 +525,12 @@ function InABox() {
               <span style={{ color: "var(--glm)" }}>For barangays that need it most.</span>
             </h2>
             <p className="text-base leading-[1.7] mb-8 reveal" style={{ color: "rgba(255,255,255,0.55)" }}>
-              GovLens In a Box is a small hardware unit that runs the entire GovLens platform locally. It creates its own WiFi network, stores data on-site, and syncs to the Provincial Hub when connectivity is available. No cloud dependency. No monthly server bills. No vendor lock-in.
+              GovLens In a Box is a small hardware unit that runs the entire GovLens platform locally. It creates its own Wi-Fi network, stores data on-site, and syncs to the Provincial Hub when connectivity is available. No cloud dependency. No monthly server bills. No vendor lock-in.
             </p>
             <div className="flex flex-col gap-4">
               {[
                 { label: "Data sovereignty", desc: "All data stays in the municipality. RA 10173 compliant by design." },
-                { label: "Syncs to Province Hub", desc: "When internet is available, the Box pushes summaries up to the Provincial GovLens tenant." },
+                { label: "Syncs to the Provincial Hub", desc: "When an internet connection is available, the Box pushes summaries up to the Provincial GovLens tenant." },
                 { label: "Survives connectivity loss", desc: "Staff keep working. Data queues and syncs automatically when the connection returns." },
               ].map((f) => (
                 <div key={f.label} className="flex items-start gap-3 reveal">
@@ -602,9 +602,9 @@ function UseCase() {
   const steps = [
     { n: "01", title: "Province receives 79 household profiling files", desc: "PSWD barangay staff submit one Excel per barangay across 7 municipalities. 4,500 households. 13,000 family members. All in different formats." },
     { n: "02", title: "GovLens team consolidates and normalizes", desc: "During onboarding, our team runs a consolidation script that merges all files into two clean CSVs ready for upload. No manual work from LGU staff." },
-    { n: "03", title: "Upload to GovLens, AI cleans", desc: "Staff upload the two CSVs. GovLens AI scans for data quality issues, suggests fixes with evidence, and scores each dataset 0 to 100. Staff approve every change." },
+    { n: "03", title: "Upload to GovLens; AI cleans the data", desc: "Staff upload the two CSVs. GovLens AI scans for data quality issues, suggests fixes with evidence, and scores each dataset 0 to 100. Staff approve every change." },
     { n: "04", title: "Dashboards appear automatically", desc: "Within minutes: 4Ps coverage by municipality, IP population by affiliation, PWD counts, vulnerability to disaster, educational attainment charts. No configuration needed." },
-    { n: "05", title: "Provincial SWDO asks in Filipino", desc: "Ask SAI: Ilan ang 4Ps beneficiaries sa Luna? Or: Which municipality has the most IP households? Instant answers from the full consolidated dataset." },
+    { n: "05", title: "The Provincial SWDO asks in Filipino", desc: 'Ask SAI: "Ilan ang 4Ps beneficiaries sa Luna?" or "Which municipality has the most IP households?" Instant answers from the full consolidated dataset.' },
   ];
   return (
     <section id="use-case" className="py-24 px-[5%]" style={{ background: "var(--white)" }}>
@@ -682,7 +682,7 @@ const FEATURES = [
   {
     icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" /></svg>,
     title: "Role-Based Access",
-    desc: "Governor sees everything. Department heads see their own data. Field staff upload only. Your data reaches the right people.",
+    desc: "The Governor sees everything. Department heads see their own data. Field staff can only upload. Your data reaches the right people.",
   },
   {
     icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="3" width="8" height="5" rx="1" /><rect x="13" y="3" width="8" height="5" rx="1" /><rect x="3" y="11" width="8" height="10" rx="1" /><rect x="13" y="11" width="8" height="5" rx="1" /></svg>,
@@ -718,7 +718,7 @@ function Features() {
         >
           Everything your office needs.
           <br />
-          <em className="not-italic" style={{ color: "var(--gl)" }}>Nothing it does not.</em>
+          <em className="not-italic" style={{ color: "var(--gl)" }}>Nothing it doesn&apos;t.</em>
         </h2>
         <p className="text-base leading-[1.7] mb-14 max-w-[560px] reveal" style={{ color: "var(--muted)" }}>
           Built specifically for Philippine government data. Not adapted from generic software.
@@ -759,12 +759,12 @@ function WhyGovLens() {
     { value: "6 months", label: "Pilot engagement with full GovLens team support" },
     { value: "< 5 min", label: "From file upload to first dashboard" },
     { value: "Filipino + English", label: "AI understands both, answers in both" },
-    { value: "0 IT staff", label: "Required to run GovLens" },
+    { value: "No IT staff", label: "required to run GovLens" },
   ];
   const reasons = [
     {
       title: "Built from inside government",
-      desc: "Our team has worked as JO and consultant staff inside Philippine LGUs. We have seen the spreadsheets, the slow reports, and the decisions that wait for data. GovLens is the tool we wished existed.",
+      desc: "Our team has worked as JO and consultant staff inside Philippine LGUs. We have seen the spreadsheets, the slow reports, and the decisions delayed by missing data. GovLens is the tool we wished existed.",
     },
     {
       title: "Philippine government data, not generic",
@@ -775,7 +775,7 @@ function WhyGovLens() {
       desc: "GovLens covers collection, connection, and understanding. No separate BI tool. No separate data warehouse. No separate forms app. One subscription covers the whole data operating system.",
     },
     {
-      title: "Pilot-Ready, not vaporware",
+      title: "Pilot-ready, not vaporware",
       desc: "GovLens is running on real data today in the Cordillera Administrative Region. The platform is deployed, tested, and ready for your office.",
     },
   ];
@@ -1002,7 +1002,7 @@ function PilotForm() {
               {status === "sending" ? "Sending..." : "Apply for the Pilot"}
             </button>
             <p className="text-[11px] text-center" style={{ color: "rgba(255,255,255,0.3)" }}>
-              No spam. We respond within 2 business days. Data handled under RA 10173.
+              No spam. We respond within 2 business days. Your data is handled in accordance with RA 10173.
             </p>
           </form>
         )}
@@ -1159,7 +1159,7 @@ function Footer() {
           style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
         >
           <div className="text-[12px]" style={{ color: "rgba(255,255,255,0.2)" }}>
-            2025 GovLens. All rights reserved.
+            © 2026 GovLens. All rights reserved.
           </div>
           <div className="text-[12px] text-center" style={{ color: "rgba(255,255,255,0.2)", fontFamily: "var(--font-sora, Sora, sans-serif)" }}>
             Technology that serves the people.
