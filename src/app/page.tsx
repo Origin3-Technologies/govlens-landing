@@ -65,8 +65,8 @@ function Hero() {
   const tabContent = [
     {
       label: "Collect",
-      headline: "Any format. Any office.",
-      body: "Upload any Excel or CSV from HR, agriculture, health, or social welfare. GovLens reads multi-row Philippine government headers automatically and converts your file into a fast, queryable format in seconds.",
+      headline: "Any source. Any format.",
+      body: "Bring data into GovLens by uploading any Excel or CSV, or by connecting live systems: PostgreSQL databases, Google Sheets, or your existing HRIS. GovLens reads multi-row Philippine government headers automatically.",
       mock: (
         <div className="rounded-xl p-4" style={{ background: "var(--glbg2)", border: "1px solid var(--glm)" }}>
           <div className="text-[11px] font-bold tracking-[1.5px] uppercase mb-3" style={{ color: "var(--gl)" }}>File Upload</div>
@@ -89,8 +89,8 @@ function Hero() {
     },
     {
       label: "Connect",
-      headline: "Live data. No manual exports.",
-      body: "Connect directly to your existing PostgreSQL database or Google Sheets. Data refreshes automatically so your dashboards always show the latest numbers without anyone touching a file.",
+      headline: "Cross-dataset analysis. No SQL required.",
+      body: "Link datasets from HR, agriculture, health, and social welfare. GovLens detects relationships between your data automatically: ask questions that span multiple offices and sources without writing a single formula.",
       mock: (
         <div className="rounded-xl p-4" style={{ background: "var(--glbg2)", border: "1px solid var(--glm)" }}>
           <div className="text-[11px] font-bold tracking-[1.5px] uppercase mb-3" style={{ color: "var(--gl)" }}>Live Connections</div>
@@ -232,7 +232,7 @@ function InABox() {
           <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5">
             <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
           </svg>
-          GovLens In a Box — Key Differentiator
+          GovLens In a Box: Key Differentiator
         </div>
         <div className="grid md:grid-cols-2 gap-12 items-start">
           <div>
@@ -248,7 +248,7 @@ function InABox() {
               <span style={{ color: "var(--glm)" }}>No internet required.</span>
             </h2>
             <p className="text-base leading-[1.7] mb-8 reveal" style={{ color: "rgba(255,255,255,0.55)" }}>
-              GovLens In a Box is a small hardware unit that runs the entire GovLens platform locally — AI cleaning, dashboards, and SAI chat — with no cloud dependency. It creates its own Wi-Fi network and syncs to the Provincial Hub when connectivity is available.
+              GovLens In a Box is a small hardware unit that runs the entire GovLens platform locally: AI cleaning, dashboards, and SAI chat: with no cloud dependency. It creates its own Wi-Fi network and syncs to the Provincial Hub when connectivity is available.
             </p>
             <div className="flex flex-col gap-5">
               {[
@@ -317,7 +317,7 @@ function InABox() {
                       </svg>
                     ),
                     title: "Local Wi-Fi Hotspot",
-                    desc: "The Box creates its own Wi-Fi. Staff connect on phones and tablets — no internet needed.",
+                    desc: "The Box creates its own Wi-Fi. Staff connect on phones and tablets: no internet needed.",
                   },
                 ].map((n) => (
                   <div
@@ -377,7 +377,7 @@ function Product() {
           <line x1="12" y1="3" x2="12" y2="15" />
         </svg>
       ),
-      body: "Upload any Excel or CSV — including multi-row Philippine government headers. A built-in form builder lets field staff collect data directly on mobile, even without internet.",
+      body: "Bring data into GovLens by uploading any Excel or CSV file, or by connecting live systems: PostgreSQL databases, Google Sheets, or your existing HRIS. All sources feed into one platform.",
     },
     {
       num: "02",
@@ -385,12 +385,14 @@ function Product() {
       title: "Connect",
       icon: (
         <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8">
-          <ellipse cx="12" cy="5" rx="9" ry="3" />
-          <path d="M3 5v6c0 1.66 4.03 3 9 3s9-1.34 9-3V5" />
-          <path d="M3 11v6c0 1.66 4.03 3 9 3s9-1.34 9-3v-6" />
+          <circle cx="18" cy="5" r="3" />
+          <circle cx="6" cy="12" r="3" />
+          <circle cx="18" cy="19" r="3" />
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
         </svg>
       ),
-      body: "Connect directly to existing PostgreSQL databases or Google Sheets with live refresh. AI data quality scoring and a 7-type cleaning engine ensure every dataset is analysis-ready.",
+      body: "Link datasets from different offices and sources. GovLens detects relationships between your data automatically: analyze HR against budget, or household profiling against 4Ps enrollment, without any SQL.",
     },
     {
       num: "03",
@@ -474,11 +476,11 @@ function Product() {
 /* ── USE CASE ── */
 function UseCase() {
   const steps = [
-    { n: "01", title: "Province receives 79 spreadsheets", desc: "PSWD staff submit one Excel per barangay across 7 municipalities — 4,500 households, 13,000 family members, all in different formats." },
-    { n: "02", title: "GovLens team consolidates", desc: "Our team merges all files into two clean CSVs ready for upload. No manual work from LGU staff." },
+    { n: "01", title: "Upload files from any office", desc: "HR, agriculture, health, social welfare — each office uploads their Excel or CSV files directly. Different formats, different headers, no problem." },
+    { n: "02", title: "GovLens merges and normalizes", desc: "GovLens automatically detects headers, combines related files, and prepares a unified dataset. No manual work from LGU staff." },
     { n: "03", title: "AI cleans the data", desc: "GovLens scans for quality issues, suggests fixes with evidence, and scores each dataset 0–100. Staff approve every change." },
-    { n: "04", title: "Dashboards appear instantly", desc: "4Ps coverage by municipality, IP population, PWD counts, educational attainment — all visualized automatically within minutes." },
-    { n: "05", title: "Ask in Filipino", desc: '"Ilan ang 4Ps beneficiaries sa Luna?" Instant answers from the full consolidated dataset.' },
+    { n: "04", title: "Dashboards appear instantly", desc: "Charts, KPIs, and breakdowns are generated automatically the moment data is clean. No configuration, no setup." },
+    { n: "05", title: "Ask in Filipino or English", desc: "Ask SAI any question about your data. Instant answers from the full combined dataset across all offices." },
   ];
   return (
     <section id="use-case" className="py-24 px-[5%]" style={{ background: "var(--white)" }}>
@@ -494,11 +496,11 @@ function UseCase() {
             color: "var(--dark)",
           }}
         >
-          From 79 spreadsheets to one<br />
-          <span style={{ color: "var(--gl)" }}>provincial dashboard.</span>
+          From scattered spreadsheets to<br />
+          <span style={{ color: "var(--gl)" }}>one live dashboard.</span>
         </h2>
         <p className="text-base leading-[1.7] mb-14 max-w-[540px] reveal" style={{ color: "var(--muted)" }}>
-          How a provincial government consolidated household profiling data across all municipalities for the first time.
+          How an LGU goes from dozens of Excel files across multiple offices to a single, queryable data platform.
         </p>
         <div className="steps-connector grid md:grid-cols-5 gap-6 relative">
           {steps.map((s) => (
@@ -539,7 +541,7 @@ function PilotForm() {
     },
     {
       q: "Does GovLens work without an internet connection?",
-      a: "Yes — GovLens In a Box runs the full platform offline. It creates its own Wi-Fi, stores data on-site, and syncs to the Provincial Hub when connectivity returns.",
+      a: "Yes: GovLens In a Box runs the full platform offline. It creates its own Wi-Fi, stores data on-site, and syncs to the Provincial Hub when connectivity returns.",
     },
     {
       q: "How long does onboarding take?",
