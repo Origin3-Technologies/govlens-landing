@@ -17,18 +17,11 @@ function useReveal() {
 /* ── NAV ── */
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
   }, []);
-  const links = [
-    { label: "Product", href: "#product" },
-    { label: "In a Box", href: "#in-a-box" },
-    { label: "Features", href: "#features" },
-    { label: "FAQ", href: "#faq" },
-  ];
   return (
     <nav
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-200"
@@ -51,53 +44,16 @@ function Nav() {
           </span>
         </a>
         <div className="hidden md:flex items-center gap-7">
-          {links.map((l) => (
-            <a key={l.href} href={l.href} className="nav-link text-sm font-medium no-underline">
-              {l.label}
-            </a>
-          ))}
+          <a href="#in-a-box" className="nav-link text-sm font-medium no-underline">In a Box</a>
+          <a href="#product" className="nav-link text-sm font-medium no-underline">How It Works</a>
         </div>
-        <div className="hidden md:flex items-center gap-3">
-          <a
-            href="#pilot-form"
-            className="btn-primary text-sm font-semibold px-5 py-2 rounded-lg no-underline"
-          >
-            Request a Pilot
-          </a>
-        </div>
-        <button
-          className="md:hidden p-2 rounded-md"
-          style={{ color: "var(--dark)" }}
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Toggle menu"
+        <a
+          href="#pilot-form"
+          className="btn-primary text-sm font-semibold px-5 py-2 rounded-lg no-underline"
         >
-          <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2">
-            {open ? <path d="M6 18L18 6M6 6l12 12" /> : <path d="M4 6h16M4 12h16M4 18h16" />}
-          </svg>
-        </button>
+          Request a Pilot
+        </a>
       </div>
-      {open && (
-        <div className="md:hidden px-[5%] pb-4 pt-2" style={{ background: "rgba(255,255,255,0.97)" }}>
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="block py-2.5 text-sm font-medium no-underline"
-              style={{ color: "var(--muted)" }}
-              onClick={() => setOpen(false)}
-            >
-              {l.label}
-            </a>
-          ))}
-          <a
-            href="#pilot-form"
-            className="btn-primary block text-center text-sm font-semibold px-5 py-2.5 rounded-lg mt-3 no-underline"
-            onClick={() => setOpen(false)}
-          >
-            Request a Pilot
-          </a>
-        </div>
-      )}
     </nav>
   );
 }
@@ -109,8 +65,8 @@ function Hero() {
   const tabContent = [
     {
       label: "Collect",
-      headline: "Any format. Any office.",
-      body: "Upload any Excel or CSV from HR, agriculture, health, or social welfare. GovLens reads multi-row Philippine government headers automatically and converts your file into a fast, queryable format in seconds.",
+      headline: "Any source. Any format.",
+      body: "Bring data into GovLens by uploading any Excel or CSV, or by connecting live systems: PostgreSQL databases, Google Sheets, or your existing HRIS. GovLens reads multi-row Philippine government headers automatically.",
       mock: (
         <div className="rounded-xl p-4" style={{ background: "var(--glbg2)", border: "1px solid var(--glm)" }}>
           <div className="text-[11px] font-bold tracking-[1.5px] uppercase mb-3" style={{ color: "var(--gl)" }}>File Upload</div>
@@ -133,16 +89,16 @@ function Hero() {
     },
     {
       label: "Connect",
-      headline: "Live data. No manual exports.",
-      body: "Connect directly to your existing PostgreSQL database or Google Sheets. Data refreshes automatically so your dashboards always show the latest numbers without anyone touching a file.",
+      headline: "Cross-dataset analysis. No SQL required.",
+      body: "Link datasets from HR, agriculture, health, and social welfare. GovLens detects relationships between your data automatically: ask questions that span multiple offices and sources without writing a single formula.",
       mock: (
         <div className="rounded-xl p-4" style={{ background: "var(--glbg2)", border: "1px solid var(--glm)" }}>
           <div className="text-[11px] font-bold tracking-[1.5px] uppercase mb-3" style={{ color: "var(--gl)" }}>Live Connections</div>
           <div className="flex flex-col gap-2">
             {[
-              { name: "Municipal HRIS", type: "PostgreSQL", status: "Connected", dot: "#22c55e" },
-              { name: "ASAP Registry", type: "Google Sheets", status: "Synced 2 min ago", dot: "#22c55e" },
-              { name: "Budget 2025", type: "CSV Upload", status: "Manual", dot: "#94a3b8" },
+              { name: "Municipal HRIS", type: "PostgreSQL", dot: "#22c55e" },
+              { name: "ASAP Registry", type: "Google Sheets", dot: "#22c55e" },
+              { name: "Budget 2025", type: "CSV Upload", dot: "#94a3b8" },
             ].map((c) => (
               <div key={c.name} className="flex items-center gap-3 rounded-lg px-3 py-2" style={{ background: "#fff", border: "1px solid var(--border)" }}>
                 <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: c.dot }} />
@@ -206,7 +162,7 @@ function Hero() {
             <span style={{ color: "var(--gl)" }}>for Philippine LGUs.</span>
           </h1>
           <p className="text-base leading-[1.75] mb-8 max-w-[520px] animate-fade-up-2" style={{ color: "var(--muted)", fontSize: "clamp(15px, 1.4vw, 17px)" }}>
-            GovLens helps local government units collect, connect, and understand their data. Upload any Excel or CSV, get instant AI-powered dashboards, and ask questions in Filipino or English.
+            Upload any Excel or CSV, get instant AI-powered dashboards, and ask questions about your data in Filipino or English. No IT team required.
           </p>
           <div className="flex flex-wrap gap-3 animate-fade-up-2">
             <a
@@ -219,11 +175,11 @@ function Hero() {
               </svg>
             </a>
             <a
-              href="#product"
+              href="#in-a-box"
               className="btn-ghost text-sm font-semibold px-7 py-3.5 rounded-xl no-underline border"
               style={{ borderColor: "var(--border)" }}
             >
-              See how it works
+              GovLens In a Box →
             </a>
           </div>
         </div>
@@ -263,86 +219,144 @@ function Hero() {
   );
 }
 
-/* ── PROBLEM ── */
-function Problem() {
-  const stats = [
-    {
-      icon: (
-        <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8">
-          <path d="M1 6s1-1 4-1 5 2 8 2 4-1 4-1V22s-1 1-4 1-5-2-8-2-4 1-4 1V6z" />
-          <line x1="1" y1="2" x2="1" y2="22" />
-        </svg>
-      ),
-      value: "57%",
-      label: "of barangays have no reliable internet connection",
-      source: "PSA 2023",
-    },
-    {
-      icon: (
-        <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-          <circle cx="9" cy="7" r="4" />
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-        </svg>
-      ),
-      value: "10,000+",
-      label: "household records consolidated from dozens of spreadsheets into one dashboard",
-      source: "GovLens Research",
-    },
-    {
-      icon: (
-        <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8">
-          <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-          <line x1="8" y1="21" x2="16" y2="21" />
-          <line x1="12" y1="17" x2="12" y2="21" />
-        </svg>
-      ),
-      value: "10+",
-      label: "separate offices generating data with no shared system to connect them",
-      source: "GovLens Research",
-    },
-  ];
+/* ── IN A BOX ── */
+function InABox() {
   return (
-    <section id="problem" className="py-24 px-[5%] relative overflow-hidden" style={{ background: "var(--navy)" }}>
+    <section id="in-a-box" className="py-24 px-[5%] relative overflow-hidden" style={{ background: "var(--navy)" }}>
       <div className="navy-grid" />
       <div className="max-w-[1100px] mx-auto relative z-10">
-        <div className="text-[11px] font-bold tracking-[2px] uppercase mb-3 reveal" style={{ color: "var(--glm)" }}>
-          The Challenge
-        </div>
-        <h2
-          className="font-extrabold leading-[1.15] tracking-[-1px] mb-4 reveal"
-          style={{
-            fontFamily: "var(--font-sora, Sora, sans-serif)",
-            fontSize: "clamp(26px, 3.2vw, 40px)",
-            color: "#fff",
-          }}
+        <div
+          className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[2px] uppercase mb-4 px-3 py-1.5 rounded-full reveal"
+          style={{ background: "rgba(29,158,117,0.15)", color: "var(--glm)", border: "1px solid rgba(29,158,117,0.25)" }}
         >
-          Philippine LGUs run on spreadsheets.<br />
-          <span style={{ color: "var(--glm)" }}>The data exists. The visibility does not.</span>
-        </h2>
-        <p className="text-base leading-[1.7] mb-14 max-w-[560px] reveal" style={{ color: "rgba(255,255,255,0.55)" }}>
-          Every office has data. These systems do not talk to each other. Decision-makers wait days for a report that should take seconds.
-        </p>
-        <div className="grid md:grid-cols-3 gap-6">
-          {stats.map((s) => (
-            <div
-              key={s.value}
-              className="reveal problem-card relative rounded-2xl p-7 pl-10"
-              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}
+          <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+          </svg>
+          GovLens In a Box: Key Differentiator
+        </div>
+        <div className="grid md:grid-cols-2 gap-12 items-start">
+          <div>
+            <h2
+              className="font-extrabold leading-[1.15] tracking-[-1px] mb-5 reveal"
+              style={{
+                fontFamily: "var(--font-sora, Sora, sans-serif)",
+                fontSize: "clamp(26px, 3.2vw, 38px)",
+                color: "#fff",
+              }}
             >
-              <div className="mb-4" style={{ color: "var(--gold)" }}>{s.icon}</div>
-              <div
-                className="font-extrabold mb-2"
-                style={{ fontFamily: "var(--font-sora, Sora, sans-serif)", fontSize: "clamp(28px, 3vw, 38px)", color: "#fff" }}
-              >
-                {s.value}
+              Full GovLens capability.<br />
+              <span style={{ color: "var(--glm)" }}>No internet required.</span>
+            </h2>
+            <p className="text-base leading-[1.7] mb-8 reveal" style={{ color: "rgba(255,255,255,0.55)" }}>
+              GovLens In a Box is a small hardware unit that runs the entire GovLens platform locally: AI cleaning, dashboards, and SAI chat: with no cloud dependency. It creates its own Wi-Fi network and syncs to the Provincial Hub when connectivity is available.
+            </p>
+            <div className="flex flex-col gap-5">
+              {[
+                {
+                  label: "Works offline, anywhere",
+                  desc: "Staff in barangays without internet keep working. Data queues and syncs automatically when connectivity returns.",
+                },
+                {
+                  label: "Data stays in the municipality",
+                  desc: "All records stored on-site. RA 10173 compliant by design. No data ever leaves without your approval.",
+                },
+                {
+                  label: "Syncs to the Provincial Hub",
+                  desc: "When internet is available, the Box pushes summaries up to the Provincial GovLens tenant for province-wide visibility.",
+                },
+                {
+                  label: "No monthly server bills",
+                  desc: "One hardware cost. No cloud fees. No vendor lock-in. Runs on standard power.",
+                },
+              ].map((f) => (
+                <div key={f.label} className="flex items-start gap-3 reveal">
+                  <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: "rgba(29,158,117,0.2)", border: "1px solid rgba(29,158,117,0.35)" }}>
+                    <svg viewBox="0 0 24 24" className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ color: "var(--glm)" }}>
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="text-[14px] font-semibold mb-0.5" style={{ color: "#fff" }}>{f.label}</div>
+                    <div className="text-[13px] leading-[1.6]" style={{ color: "rgba(255,255,255,0.5)" }}>{f.desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="reveal">
+            <div className="rounded-2xl p-6" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+              <div className="text-[11px] font-bold tracking-[1.5px] uppercase mb-5" style={{ color: "rgba(255,255,255,0.3)" }}>
+                What&apos;s Inside the Box
               </div>
-              <div className="text-sm leading-[1.6] mb-3" style={{ color: "rgba(255,255,255,0.6)" }}>{s.label}</div>
-              <div className="mono text-[10px] font-medium px-2 py-0.5 rounded" style={{ background: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.35)" }}>
-                {s.source}
+              <div className="flex flex-col gap-3 mb-6">
+                {[
+                  {
+                    icon: (
+                      <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8">
+                        <rect x="2" y="3" width="20" height="14" rx="2" />
+                        <path d="M8 21h8M12 17v4" />
+                      </svg>
+                    ),
+                    title: "AI + Compute",
+                    desc: "Local AI for cleaning, dashboards, and SAI chat. No cloud required.",
+                  },
+                  {
+                    icon: (
+                      <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                      </svg>
+                    ),
+                    title: "Containerized Apps",
+                    desc: "GovLens, storage, and database run inside Docker. Zero server configuration.",
+                  },
+                  {
+                    icon: (
+                      <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8">
+                        <path d="M1.42 9a16 16 0 0 1 21.16 0M5 12.55a11 11 0 0 1 14.08 0M10.83 16.11a6 6 0 0 1 2.33 0" />
+                        <line x1="12" y1="20" x2="12.01" y2="20" />
+                      </svg>
+                    ),
+                    title: "Local Wi-Fi Hotspot",
+                    desc: "The Box creates its own Wi-Fi. Staff connect on phones and tablets: no internet needed.",
+                  },
+                ].map((n) => (
+                  <div
+                    key={n.title}
+                    className="box-node rounded-xl p-4 flex items-start gap-4"
+                    style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.07)" }}
+                  >
+                    <div
+                      className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                      style={{ background: "rgba(29,158,117,0.15)", color: "var(--glm)" }}
+                    >
+                      {n.icon}
+                    </div>
+                    <div>
+                      <div className="font-semibold text-[14px] mb-1" style={{ color: "#fff" }}>{n.title}</div>
+                      <div className="text-[12px] leading-[1.6]" style={{ color: "rgba(255,255,255,0.45)" }}>{n.desc}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="rounded-xl p-4" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.05)" }}>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-[11px] font-bold tracking-[1.5px] uppercase" style={{ color: "rgba(255,255,255,0.3)" }}>Sync Status</span>
+                  <span className="flex items-center gap-1.5 text-[11px]" style={{ color: "#4ade80" }}>
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
+                    Online
+                  </span>
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  {["Luna Box", "Kabugao Box", "Province Hub"].map((n, i) => (
+                    <div key={n} className="flex items-center justify-between text-[12px]">
+                      <span style={{ color: "rgba(255,255,255,0.5)" }}>{n}</span>
+                      <span style={{ color: i < 2 ? "var(--glm)" : "#4ade80" }}>{i < 2 ? "Synced 4m ago" : "Live"}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </section>
@@ -363,8 +377,7 @@ function Product() {
           <line x1="12" y1="3" x2="12" y2="15" />
         </svg>
       ),
-      body: "Smart file upload handles any Excel or CSV, including multi-row Philippine government headers. A built-in form builder lets field staff collect data directly on mobile, even without internet.",
-      bullets: ["Multi-row header detection", "Built-in mobile form builder", "Works offline, syncs when connected"],
+      body: "Bring data into GovLens by uploading any Excel or CSV file, or by connecting live systems: PostgreSQL databases, Google Sheets, or your existing HRIS. All sources feed into one platform.",
     },
     {
       num: "02",
@@ -372,13 +385,14 @@ function Product() {
       title: "Connect",
       icon: (
         <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8">
-          <ellipse cx="12" cy="5" rx="9" ry="3" />
-          <path d="M3 5v6c0 1.66 4.03 3 9 3s9-1.34 9-3V5" />
-          <path d="M3 11v6c0 1.66 4.03 3 9 3s9-1.34 9-3v-6" />
+          <circle cx="18" cy="5" r="3" />
+          <circle cx="6" cy="12" r="3" />
+          <circle cx="18" cy="19" r="3" />
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
         </svg>
       ),
-      body: "Connect directly to existing PostgreSQL databases or Google Sheets with live refresh. Your data is always current without manual exports. AI data quality scoring and a 7-type cleaning engine ensure every dataset is analysis-ready.",
-      bullets: ["Live PostgreSQL and Google Sheets connectors", "AI data quality scoring (0-100)", "7-type AI and rule-based cleaning engine"],
+      body: "Link datasets from different offices and sources. GovLens detects relationships between your data automatically: analyze HR against budget, or household profiling against 4Ps enrollment, without any SQL.",
     },
     {
       num: "03",
@@ -389,8 +403,7 @@ function Product() {
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
         </svg>
       ),
-      body: "Auto-generated dashboards appear the moment data is clean. SAI, the GovLens AI analyst, answers questions in Filipino or English. Role-based access means the Governor sees everything while field staff see only their own data.",
-      bullets: ["Auto-generated dashboards on clean data", "SAI answers questions in Filipino or English", "Role-based access control"],
+      body: "Auto-generated dashboards appear the moment data is clean. SAI answers questions in Filipino or English. Role-based access means each office sees exactly what it should.",
     },
   ];
   return (
@@ -432,17 +445,7 @@ function Product() {
               >
                 {c.title}
               </div>
-              <p className="text-sm leading-[1.7] mb-5" style={{ color: "var(--muted)" }}>{c.body}</p>
-              <ul className="flex flex-col gap-2">
-                {c.bullets.map((b) => (
-                  <li key={b} className="flex items-start gap-2 text-[13px]" style={{ color: "var(--dark)" }}>
-                    <svg viewBox="0 0 24 24" className="w-4 h-4 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ color: "var(--gl)" }}>
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                    {b}
-                  </li>
-                ))}
-              </ul>
+              <p className="text-sm leading-[1.7]" style={{ color: "var(--muted)" }}>{c.body}</p>
             </div>
           ))}
         </div>
@@ -470,141 +473,14 @@ function Product() {
   );
 }
 
-/* ── IN A BOX ── */
-function InABox() {
-  const nodes = [
-    {
-      icon: (
-        <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8">
-          <rect x="2" y="3" width="20" height="14" rx="2" />
-          <path d="M8 21h8M12 17v4" />
-        </svg>
-      ),
-      title: "AI + Compute",
-      desc: "Runs local AI models for cleaning, dashboards, and chat. No cloud required.",
-    },
-    {
-      icon: (
-        <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-        </svg>
-      ),
-      title: "Containerized Apps",
-      desc: "GovLens, storage, and database run inside Docker. Zero server configuration.",
-    },
-    {
-      icon: (
-        <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8">
-          <path d="M1.42 9a16 16 0 0 1 21.16 0M5 12.55a11 11 0 0 1 14.08 0M10.83 16.11a6 6 0 0 1 2.33 0" />
-          <line x1="12" y1="20" x2="12.01" y2="20" />
-        </svg>
-      ),
-      title: "Local WiFi Hotspot",
-      desc: "The Box creates its own Wi-Fi network. Staff connect on phones and tablets. No internet needed.",
-    },
-  ];
-  return (
-    <section id="in-a-box" className="py-24 px-[5%] relative overflow-hidden" style={{ background: "var(--navy)" }}>
-      <div className="navy-grid" />
-      <div className="max-w-[1100px] mx-auto relative z-10">
-        <div className="text-[11px] font-bold tracking-[2px] uppercase mb-3 reveal" style={{ color: "var(--glm)" }}>
-          GovLens In a Box
-        </div>
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          <div>
-            <h2
-              className="font-extrabold leading-[1.15] tracking-[-1px] mb-4 reveal"
-              style={{
-                fontFamily: "var(--font-sora, Sora, sans-serif)",
-                fontSize: "clamp(26px, 3.2vw, 38px)",
-                color: "#fff",
-              }}
-            >
-              Full capability. No internet.
-              <br />
-              <span style={{ color: "var(--glm)" }}>For barangays that need it most.</span>
-            </h2>
-            <p className="text-base leading-[1.7] mb-8 reveal" style={{ color: "rgba(255,255,255,0.55)" }}>
-              GovLens In a Box is a small hardware unit that runs the entire GovLens platform locally. It creates its own Wi-Fi network, stores data on-site, and syncs to the Provincial Hub when connectivity is available. No cloud dependency. No monthly server bills. No vendor lock-in.
-            </p>
-            <div className="flex flex-col gap-4">
-              {[
-                { label: "Data sovereignty", desc: "All data stays in the municipality. RA 10173 compliant by design." },
-                { label: "Syncs to the Provincial Hub", desc: "When an internet connection is available, the Box pushes summaries up to the Provincial GovLens tenant." },
-                { label: "Survives connectivity loss", desc: "Staff keep working. Data queues and syncs automatically when the connection returns." },
-              ].map((f) => (
-                <div key={f.label} className="flex items-start gap-3 reveal">
-                  <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: "rgba(147,197,253,0.15)", border: "1px solid rgba(147,197,253,0.25)" }}>
-                    <svg viewBox="0 0 24 24" className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ color: "var(--glm)" }}>
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                  </div>
-                  <div>
-                    <div className="text-[13px] font-semibold mb-0.5" style={{ color: "#fff" }}>{f.label}</div>
-                    <div className="text-[13px] leading-[1.6]" style={{ color: "rgba(255,255,255,0.5)" }}>{f.desc}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="reveal">
-            <div className="rounded-2xl p-6" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-              <div className="text-[11px] font-bold tracking-[1.5px] uppercase mb-5" style={{ color: "rgba(255,255,255,0.3)" }}>
-                Inside the Box
-              </div>
-              <div className="flex flex-col gap-3 mb-6">
-                {nodes.map((n) => (
-                  <div
-                    key={n.title}
-                    className="box-node rounded-xl p-4 flex items-start gap-4"
-                    style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.07)" }}
-                  >
-                    <div
-                      className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
-                      style={{ background: "rgba(37,99,235,0.2)", color: "var(--glm)" }}
-                    >
-                      {n.icon}
-                    </div>
-                    <div>
-                      <div className="font-semibold text-[14px] mb-1" style={{ color: "#fff" }}>{n.title}</div>
-                      <div className="text-[12px] leading-[1.6]" style={{ color: "rgba(255,255,255,0.45)" }}>{n.desc}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="rounded-xl p-4" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.05)" }}>
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-[11px] font-bold tracking-[1.5px] uppercase" style={{ color: "rgba(255,255,255,0.3)" }}>Sync Status</span>
-                  <span className="flex items-center gap-1.5 text-[11px]" style={{ color: "#4ade80" }}>
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
-                    Online
-                  </span>
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  {["Luna Box", "Kabugao Box", "Province Hub"].map((n, i) => (
-                    <div key={n} className="flex items-center justify-between text-[12px]">
-                      <span style={{ color: "rgba(255,255,255,0.5)" }}>{n}</span>
-                      <span style={{ color: i < 2 ? "var(--glm)" : "#4ade80" }}>{i < 2 ? "Synced 4m ago" : "Live"}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* ── USE CASE ── */
 function UseCase() {
   const steps = [
-    { n: "01", title: "Province receives 79 household profiling files", desc: "PSWD barangay staff submit one Excel per barangay across 7 municipalities. 4,500 households. 13,000 family members. All in different formats." },
-    { n: "02", title: "GovLens team consolidates and normalizes", desc: "During onboarding, our team runs a consolidation script that merges all files into two clean CSVs ready for upload. No manual work from LGU staff." },
-    { n: "03", title: "Upload to GovLens; AI cleans the data", desc: "Staff upload the two CSVs. GovLens AI scans for data quality issues, suggests fixes with evidence, and scores each dataset 0 to 100. Staff approve every change." },
-    { n: "04", title: "Dashboards appear automatically", desc: "Within minutes: 4Ps coverage by municipality, IP population by affiliation, PWD counts, vulnerability to disaster, educational attainment charts. No configuration needed." },
-    { n: "05", title: "The Provincial SWDO asks in Filipino", desc: 'Ask SAI: "Ilan ang 4Ps beneficiaries sa Luna?" or "Which municipality has the most IP households?" Instant answers from the full consolidated dataset.' },
+    { n: "01", title: "Upload files from any office", desc: "HR, agriculture, health, social welfare — each office uploads their Excel or CSV files directly. Different formats, different headers, no problem." },
+    { n: "02", title: "GovLens merges and normalizes", desc: "GovLens automatically detects headers, combines related files, and prepares a unified dataset. No manual work from LGU staff." },
+    { n: "03", title: "AI cleans the data", desc: "GovLens scans for quality issues, suggests fixes with evidence, and scores each dataset 0–100. Staff approve every change." },
+    { n: "04", title: "Dashboards appear instantly", desc: "Charts, KPIs, and breakdowns are generated automatically the moment data is clean. No configuration, no setup." },
+    { n: "05", title: "Ask in Filipino or English", desc: "Ask SAI any question about your data. Instant answers from the full combined dataset across all offices." },
   ];
   return (
     <section id="use-case" className="py-24 px-[5%]" style={{ background: "var(--white)" }}>
@@ -620,11 +496,11 @@ function UseCase() {
             color: "var(--dark)",
           }}
         >
-          From 79 spreadsheets to one<br />
-          <span style={{ color: "var(--gl)" }}>provincial dashboard.</span>
+          From scattered spreadsheets to<br />
+          <span style={{ color: "var(--gl)" }}>one live dashboard.</span>
         </h2>
         <p className="text-base leading-[1.7] mb-14 max-w-[540px] reveal" style={{ color: "var(--muted)" }}>
-          How a provincial government used GovLens to consolidate household profiling data across all municipalities for the first time.
+          How an LGU goes from dozens of Excel files across multiple offices to a single, queryable data platform.
         </p>
         <div className="steps-connector grid md:grid-cols-5 gap-6 relative">
           {steps.map((s) => (
@@ -652,202 +528,27 @@ function UseCase() {
   );
 }
 
-/* ── FEATURES ── */
-const FEATURES = [
-  {
-    icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" /></svg>,
-    title: "Smart File Upload",
-    desc: "Accepts any Excel or CSV, including multi-row headers common in Philippine government forms. Converts to fast, queryable format instantly.",
-  },
-  {
-    icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="12" cy="12" r="10" /><path d="M12 8v4l3 3" /></svg>,
-    title: "AI Data Quality Scoring",
-    desc: "Every dataset gets a quality score from 0 to 100. GovLens understands Philippine-specific patterns like Salary Grades, Civil Service eligibility, and position titles.",
-  },
-  {
-    icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>,
-    title: "7-Type Cleaning Engine",
-    desc: "Detects and suggests fixes for typos, inconsistent values, sentinel placeholders, and outliers. You approve every fix.",
-  },
-  {
-    icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="3" y="14" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /></svg>,
-    title: "Auto-Generated Dashboards",
-    desc: "The moment your data is clean, GovLens builds a relevant dashboard automatically. HR gets headcount charts. Agriculture gets crop and farmer breakdowns.",
-  },
-  {
-    icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>,
-    title: "Ask SAI in Filipino or English",
-    desc: 'Type any question about your data. "Ano ang average na sahod ng SG-15?" or "How many vacancies in Engineering?" Answered instantly.',
-  },
-  {
-    icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" /></svg>,
-    title: "Role-Based Access",
-    desc: "The Governor sees everything. Department heads see their own data. Field staff can only upload. Your data reaches the right people.",
-  },
-  {
-    icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="3" width="8" height="5" rx="1" /><rect x="13" y="3" width="8" height="5" rx="1" /><rect x="3" y="11" width="8" height="10" rx="1" /><rect x="13" y="11" width="8" height="5" rx="1" /></svg>,
-    title: "Drag-and-Drop Dashboard Builder",
-    desc: "Build the exact view your office needs. Drag KPI cards, bar charts, donuts, and timelines onto a live canvas. Save, share, and print to PDF in one click.",
-  },
-  {
-    icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.8"><ellipse cx="12" cy="5" rx="9" ry="3" /><path d="M3 5v6c0 1.66 4.03 3 9 3s9-1.34 9-3V5" /><path d="M3 11v6c0 1.66 4.03 3 9 3s9-1.34 9-3v-6" /></svg>,
-    title: "Live Database Connections",
-    desc: "Connect directly to your existing PostgreSQL database or Google Sheets. Data refreshes automatically.",
-  },
-  {
-    icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M1.42 9a16 16 0 0 1 21.16 0M5 12.55a11 11 0 0 1 14.08 0M10.83 16.11a6 6 0 0 1 2.33 0" /><line x1="12" y1="20" x2="12.01" y2="20" /></svg>,
-    title: "Works Without Internet",
-    desc: "GovLens In a Box runs the full platform locally. Staff in offline barangays keep working. Data syncs when connectivity returns.",
-  },
-];
-
-function Features() {
-  return (
-    <section id="features" className="py-24 px-[5%]" style={{ background: "var(--surf)" }}>
-      <div className="max-w-[1100px] mx-auto">
-        <div className="text-[11px] font-bold tracking-[2px] uppercase mb-3 reveal" style={{ color: "var(--gl)" }}>
-          Features
-        </div>
-        <h2
-          className="font-extrabold leading-[1.15] tracking-[-1px] mb-4 reveal"
-          style={{
-            fontFamily: "var(--font-sora, Sora, sans-serif)",
-            fontSize: "clamp(28px, 3.5vw, 42px)",
-            color: "var(--dark)",
-          }}
-        >
-          Everything your office needs.
-          <br />
-          <em className="not-italic" style={{ color: "var(--gl)" }}>Nothing it doesn&apos;t.</em>
-        </h2>
-        <p className="text-base leading-[1.7] mb-14 max-w-[560px] reveal" style={{ color: "var(--muted)" }}>
-          Built specifically for Philippine government data. Not adapted from generic software.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {FEATURES.map((f) => (
-            <div
-              key={f.title}
-              className="reveal feat-card-hover rounded-2xl p-7 cursor-default"
-              style={{ background: "var(--white)", border: "1px solid var(--border)", transition: "all 0.2s" }}
-            >
-              <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
-                style={{ background: "var(--glbg)", color: "var(--gl)" }}
-              >
-                {f.icon}
-              </div>
-              <div
-                className="font-bold text-[15px] mb-1.5"
-                style={{ fontFamily: "var(--font-sora, Sora, sans-serif)", color: "var(--dark)" }}
-              >
-                {f.title}
-              </div>
-              <div className="text-[13px] leading-[1.6]" style={{ color: "var(--muted)" }}>
-                {f.desc}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ── WHY GOVLENS ── */
-function WhyGovLens() {
-  const metrics = [
-    { value: "6 months", label: "Pilot engagement with full GovLens team support" },
-    { value: "< 5 min", label: "From file upload to first dashboard" },
-    { value: "Filipino + English", label: "AI understands both, answers in both" },
-    { value: "No IT staff", label: "required to run GovLens" },
-  ];
-  const reasons = [
-    {
-      title: "Built from inside government",
-      desc: "Our team has worked as JO and consultant staff inside Philippine LGUs. We have seen the spreadsheets, the slow reports, and the decisions delayed by missing data. GovLens is the tool we wished existed.",
-    },
-    {
-      title: "Philippine government data, not generic",
-      desc: "We know Salary Grades 1 to 33, GSIS eligibility codes, 4Ps beneficiary flags, DBM plantilla formats, and PSWD household profiling columns. The AI understands context that generic tools miss.",
-    },
-    {
-      title: "One vendor, one contract",
-      desc: "GovLens covers collection, connection, and understanding. No separate BI tool. No separate data warehouse. No separate forms app. One subscription covers the whole data operating system.",
-    },
-    {
-      title: "Pilot-ready, not vaporware",
-      desc: "GovLens is running on real data today in the Cordillera Administrative Region. The platform is deployed, tested, and ready for your office.",
-    },
-  ];
-  return (
-    <section id="why" className="py-24 px-[5%]" style={{ background: "var(--white)" }}>
-      <div className="max-w-[1100px] mx-auto">
-        <div className="text-[11px] font-bold tracking-[2px] uppercase mb-3 reveal" style={{ color: "var(--gl)" }}>
-          Why GovLens
-        </div>
-        <h2
-          className="font-extrabold leading-[1.15] tracking-[-1px] mb-14 reveal"
-          style={{
-            fontFamily: "var(--font-sora, Sora, sans-serif)",
-            fontSize: "clamp(28px, 3.5vw, 42px)",
-            color: "var(--dark)",
-          }}
-        >
-          Data clarity changes decisions.
-        </h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-          {metrics.map((m) => (
-            <div key={m.value} className="reveal card-hover rounded-2xl p-6" style={{ background: "var(--surf)", border: "1px solid var(--border)" }}>
-              <div
-                className="font-extrabold mb-2"
-                style={{ fontFamily: "var(--font-sora, Sora, sans-serif)", fontSize: "clamp(18px, 2vw, 26px)", color: "var(--gl)" }}
-              >
-                {m.value}
-              </div>
-              <div className="text-[13px] leading-[1.5]" style={{ color: "var(--muted)" }}>{m.label}</div>
-            </div>
-          ))}
-        </div>
-        <div className="grid md:grid-cols-2 gap-6">
-          {reasons.map((r) => (
-            <div
-              key={r.title}
-              className="reveal rounded-2xl p-7"
-              style={{ background: "var(--surf)", border: "1px solid var(--border)" }}
-            >
-              <div className="font-bold text-[15px] mb-2" style={{ fontFamily: "var(--font-sora, Sora, sans-serif)", color: "var(--dark)" }}>
-                {r.title}
-              </div>
-              <p className="text-sm leading-[1.7]" style={{ color: "var(--muted)" }}>{r.desc}</p>
-            </div>
-          ))}
-        </div>
-        <div className="mt-12 reveal">
-          <div
-            className="rounded-2xl px-8 py-5 flex flex-wrap gap-6 items-center"
-            style={{ background: "var(--glbg)", border: "1px solid var(--glbg2)" }}
-          >
-            <div className="text-[13px] font-bold" style={{ color: "var(--dark)" }}>Currently piloting with:</div>
-            {["Provincial LGUs", "Municipal LGUs"].map((t) => (
-              <div key={t} className="flex items-center gap-2 text-[13px]" style={{ color: "var(--muted)" }}>
-                <div className="w-2 h-2 rounded-full" style={{ background: "var(--gl)" }} />
-                {t}
-              </div>
-            ))}
-            <div className="text-[12px] ml-auto" style={{ color: "var(--sub)" }}>
-              Client names shared under NDA during discovery
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* ── PILOT FORM ── */
 function PilotForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [form, setForm] = useState({ name: "", org: "", email: "", role: "", phone: "", message: "" });
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const faqs = [
+    {
+      q: "What does the pilot cost?",
+      a: "The 6-month pilot is free for Founding Partners. Full access, all features, hands-on onboarding support. At the end of 6 months, you decide whether to continue.",
+    },
+    {
+      q: "Does GovLens work without an internet connection?",
+      a: "Yes: GovLens In a Box runs the full platform offline. It creates its own Wi-Fi, stores data on-site, and syncs to the Provincial Hub when connectivity returns.",
+    },
+    {
+      q: "How long does onboarding take?",
+      a: "Under 30 minutes for a standard dataset. For complex multi-file data like household profiling, our team handles the consolidation so your staff only sees the clean, ready-to-use version.",
+    },
+  ];
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   const onSubmit = async (e: React.FormEvent) => {
@@ -887,9 +588,43 @@ function PilotForm() {
         >
           Join the 6-Month Pilot.
         </h2>
-        <p className="text-base leading-[1.7] mb-10 reveal text-center" style={{ color: "rgba(255,255,255,0.55)" }}>
+        <p className="text-base leading-[1.7] mb-8 reveal text-center" style={{ color: "rgba(255,255,255,0.55)" }}>
           We are selecting 3 to 5 Founding Partner LGUs. Partners receive priority support, co-development input, and preferred pilot pricing. Slots are limited.
         </p>
+
+        {/* Inline FAQ */}
+        <div className="flex flex-col gap-2 mb-10 reveal">
+          {faqs.map((f, i) => (
+            <div
+              key={f.q}
+              className="rounded-xl overflow-hidden"
+              style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}
+            >
+              <button
+                className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left"
+                onClick={() => setOpenFaq(openFaq === i ? null : i)}
+              >
+                <span className="text-[13px] font-semibold" style={{ color: "rgba(255,255,255,0.85)" }}>{f.q}</span>
+                <svg
+                  viewBox="0 0 24 24"
+                  className="w-4 h-4 flex-shrink-0 transition-transform duration-200"
+                  style={{ color: "var(--glm)", transform: openFaq === i ? "rotate(180deg)" : "rotate(0deg)" }}
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
+              {openFaq === i && (
+                <div className="px-5 pb-4 text-[13px] leading-[1.7]" style={{ color: "rgba(255,255,255,0.5)" }}>
+                  {f.a}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
         {status === "success" ? (
           <div className="rounded-2xl p-10 text-center reveal" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
             <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: "rgba(74,222,128,0.15)", border: "1px solid rgba(74,222,128,0.3)" }}>
@@ -1011,93 +746,6 @@ function PilotForm() {
   );
 }
 
-/* ── FAQ ── */
-function FAQ() {
-  const faqs = [
-    {
-      q: "Who is GovLens for?",
-      a: "GovLens is built for Philippine Local Government Units: municipalities, cities, and provinces. It is especially designed for LGUs with limited IT staff who manage data in Excel and need faster insights for decision-making.",
-    },
-    {
-      q: "Do we need an internet connection to use GovLens?",
-      a: "The cloud version requires internet. GovLens In a Box runs the full platform locally and creates its own WiFi network, so staff in offline barangays can keep working. Data syncs automatically when connectivity returns.",
-    },
-    {
-      q: "What file formats does GovLens accept?",
-      a: "GovLens accepts any Excel (.xlsx, .xls) and CSV file, including files with multi-row headers common in Philippine government forms. It also connects directly to PostgreSQL databases and Google Sheets.",
-    },
-    {
-      q: "How does the AI cleaning work?",
-      a: "After you upload a file, GovLens AI scans the dataset using a 7-type cleaning engine. It detects typos, inconsistent values, placeholder data, and outliers, then suggests specific fixes with evidence. You approve every change. Nothing changes without your confirmation.",
-    },
-    {
-      q: "Is GovLens compliant with Philippine data laws?",
-      a: "Yes. GovLens is designed around RA 10173 (Data Privacy Act) and is aligned with RA 12254 (E-Governance Act). All actions are logged for COA-ready audit trails. Tenant data is isolated so one LGU cannot access another.",
-    },
-    {
-      q: "How long does onboarding take?",
-      a: "A standard dataset onboarding takes under 30 minutes: upload, AI cleaning review, and a dashboard is ready. For more complex data like multi-file household profiling, our team handles the consolidation during the onboarding period so your staff only sees the clean, ready-to-use version.",
-    },
-    {
-      q: "What is the Founding Partner Program?",
-      a: "The first 3 to 5 LGUs to join the pilot get priority support, input into the product roadmap, and preferred pilot pricing. We treat Founding Partners as co-developers, not just customers.",
-    },
-    {
-      q: "What does the 6-month pilot include?",
-      a: "Full access to GovLens for your LGU, onboarding support from our team, data consolidation for your first datasets, and dedicated check-ins throughout the pilot. At the end of 6 months, you decide whether to continue.",
-    },
-    {
-      q: "How is GovLens different from Power BI or Google Looker?",
-      a: "GovLens is built specifically for Philippine LGUs. It understands local data formats, Salary Grades, government position titles, and Filipino language queries out of the box. It also includes data collection (forms), AI cleaning, and an offline hardware option. Generic BI tools need months of configuration to get to the same point.",
-    },
-  ];
-  return (
-    <section id="faq" className="py-24 px-[5%]" style={{ background: "var(--surf)" }}>
-      <div className="max-w-[760px] mx-auto">
-        <div className="text-[11px] font-bold tracking-[2px] uppercase mb-3 reveal text-center" style={{ color: "var(--gl)" }}>
-          FAQ
-        </div>
-        <h2
-          className="font-extrabold leading-[1.15] tracking-[-1px] mb-12 reveal text-center"
-          style={{
-            fontFamily: "var(--font-sora, Sora, sans-serif)",
-            fontSize: "clamp(26px, 3.2vw, 38px)",
-            color: "var(--dark)",
-          }}
-        >
-          Common questions.
-        </h2>
-        <div className="flex flex-col gap-3">
-          {faqs.map((f) => (
-            <details
-              key={f.q}
-              className="reveal rounded-2xl group"
-              style={{ background: "var(--white)", border: "1px solid var(--border)" }}
-            >
-              <summary className="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer select-none list-none">
-                <span className="font-semibold text-[15px]" style={{ color: "var(--dark)" }}>{f.q}</span>
-                <svg
-                  viewBox="0 0 24 24"
-                  className="faq-chevron w-4 h-4 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  style={{ color: "var(--sub)" }}
-                >
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
-              </summary>
-              <div className="px-6 pb-5 text-sm leading-[1.7]" style={{ color: "var(--muted)" }}>
-                {f.a}
-              </div>
-            </details>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* ── FOOTER ── */
 function Footer() {
   return (
@@ -1129,19 +777,16 @@ function Footer() {
               Product
             </div>
             <div className="flex flex-col gap-3">
-              {["#product", "#in-a-box", "#features", "#faq"].map((href) => {
-                const labels: Record<string, string> = {
-                  "#product": "How It Works",
-                  "#in-a-box": "In a Box",
-                  "#features": "Features",
-                  "#faq": "FAQ",
-                };
-                return (
-                  <a key={href} href={href} className="footer-link text-[13px] no-underline">
-                    {labels[href]}
-                  </a>
-                );
-              })}
+              {[
+                { href: "#in-a-box", label: "In a Box" },
+                { href: "#product", label: "How It Works" },
+                { href: "#use-case", label: "Real Use Case" },
+                { href: "#pilot-form", label: "Apply for Pilot" },
+              ].map(({ href, label }) => (
+                <a key={href} href={href} className="footer-link text-[13px] no-underline">
+                  {label}
+                </a>
+              ))}
             </div>
           </div>
           <div>
@@ -1183,14 +828,10 @@ export default function Page() {
       <Nav />
       <main>
         <Hero />
-        <Problem />
-        <Product />
         <InABox />
+        <Product />
         <UseCase />
-        <Features />
-        <WhyGovLens />
         <PilotForm />
-        <FAQ />
       </main>
       <Footer />
     </>
