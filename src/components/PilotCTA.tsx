@@ -15,6 +15,21 @@ const DEPARTMENTS = [
 
 const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "";
 
+const FAQS = [
+  {
+    q: "What does the pilot cost?",
+    a: "The 6-month pilot is free for Founding Partners. Full access, all features. At the end, you decide whether to continue.",
+  },
+  {
+    q: "Does GovLens work without internet?",
+    a: "Yes — GovLens In a Box runs the full platform offline, creates its own Wi-Fi, and syncs when connectivity returns.",
+  },
+  {
+    q: "How long does onboarding take?",
+    a: "Under 30 minutes for a standard dataset. For complex multi-file data, our team handles the consolidation.",
+  },
+];
+
 // Simple rate limit: track last submission time in memory
 let lastSubmitTime = 0;
 const RATE_LIMIT_MS = 30_000; // 30 seconds between submissions
