@@ -2,6 +2,9 @@
 
 GovLens product marketing page at **govlens.ph**. Targets LGU decision-makers. Pilot application via Formspree. Interactive `/demo` simulates the full GovLens app experience.
 
+## Design
+- **Follow `DESIGN.md`** (repo root) for every visual change: the GovLens green "Daylight Ledger" brand (forest green `#0F6E56`, white page, Sora + DM Sans, nothing under 13px). It replaces the April blue/navy/gold palette; its "Migrating govlens-landing" section has the token block and checklist.
+
 ## Repo & Branch
 - GitHub: `Origin3-Technologies/govlens-landing`
 - **Active branch: `main`** — this is what deploys to govlens.ph (`rebrand-2026` was merged into `main` in session 30)
